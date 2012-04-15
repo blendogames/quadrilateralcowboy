@@ -67,7 +67,6 @@ If you have questions concerning this license or the applicable additional terms
 #define	BUILD_STRING					"win-x86"
 #define BUILD_OS_ID						0
 #define	CPUSTRING						"x86"
-#define CPU_EASYARGS					1
 
 #define ALIGN16( x )					__declspec(align(16)) x
 #define PACKED
@@ -93,13 +92,10 @@ If you have questions concerning this license or the applicable additional terms
 #define BUILD_OS_ID					1
 #ifdef __ppc__
 	#define	CPUSTRING					"ppc"
-	#define CPU_EASYARGS				0
 #elif defined(__i386__)
 	#define	CPUSTRING					"x86"
-	#define CPU_EASYARGS				1
 #elif defined(__x86_64__)
 	#define	CPUSTRING					"x86_64"
-	#define CPU_EASYARGS				0
 #else
 #error Unrecognized CPU arch!
 #endif
@@ -139,16 +135,13 @@ If you have questions concerning this license or the applicable additional terms
 	#define	BUILD_STRING				"linux-x86"
 	#define BUILD_OS_ID					2
 	#define CPUSTRING					"x86"
-	#define CPU_EASYARGS				1
 #elif defined(__x86_64__)
 	#define BUILD_STRING				"linux-x86_64"
 	#define BUILD_OS_ID					2
 	#define CPUSTRING					"x86_64"
-	#define CPU_EASYARGS				0
 #elif defined(__ppc__)
 	#define	BUILD_STRING				"linux-ppc"
 	#define CPUSTRING					"ppc"
-	#define CPU_EASYARGS				0
 #else
 #error Unrecognized CPU arch!
 #endif
