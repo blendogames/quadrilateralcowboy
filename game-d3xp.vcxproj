@@ -1,0 +1,495 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug with inlines and memory log|Win32">
+      <Configuration>Debug with inlines and memory log</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug with inlines|Win32">
+      <Configuration>Debug with inlines</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dedicated Debug with inlines|Win32">
+      <Configuration>Dedicated Debug with inlines</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dedicated Debug|Win32">
+      <Configuration>Dedicated Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dedicated Release|Win32">
+      <Configuration>Dedicated Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release NO STEAM|Win32">
+      <Configuration>Release NO STEAM</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>Game-d3xp</ProjectName>
+    <ProjectGuid>{0BC6FCC9-C65E-4B1F-9A58-0B9399987C9F}</ProjectGuid>
+    <RootNamespace>Game-d3xp</RootNamespace>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccProvider>
+    </SccProvider>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug with inlines|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug with inlines and memory log|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug with inlines|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release NO STEAM|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="_Common.props" />
+    <Import Project="_Game-d3xp.props" />
+    <Import Project="_Dedicated.props" />
+    <Import Project="_Release.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug with inlines|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="_Common.props" />
+    <Import Project="_Game-d3xp.props" />
+    <Import Project="_Dedicated.props" />
+    <Import Project="_Debug.props" />
+    <Import Project="_WithInlines.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="_Common.props" />
+    <Import Project="_Game-d3xp.props" />
+    <Import Project="_Dedicated.props" />
+    <Import Project="_Debug.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug with inlines and memory log|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="_Common.props" />
+    <Import Project="_Game-d3xp.props" />
+    <Import Project="_Debug.props" />
+    <Import Project="_WithInlines.props" />
+    <Import Project="_WithMemoryLog.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug with inlines|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="_Common.props" />
+    <Import Project="_Game-d3xp.props" />
+    <Import Project="_Debug.props" />
+    <Import Project="_WithInlines.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="_Common.props" />
+    <Import Project="_Game-d3xp.props" />
+    <Import Project="_Release.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release NO STEAM|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="_Common.props" />
+    <Import Project="_Game-d3xp.props" />
+    <Import Project="_Release.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="_Common.props" />
+    <Import Project="_Game-d3xp.props" />
+    <Import Project="_Debug.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug with inlines and memory log|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug with inlines and memory log|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug with inlines and memory log|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug with inlines|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug with inlines|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug with inlines|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug with inlines|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug with inlines|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug with inlines|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Dedicated Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Dedicated Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Dedicated Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release NO STEAM|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release NO STEAM|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release NO STEAM|Win32'" />
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\base\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\base\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release NO STEAM|Win32'">..\base\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <ClCompile>
+      <PreprocessorDefinitions>USE_SDL;STEAM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>steam;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>Yes</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>steam_api.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>steam;sdl2\lib\win32</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug with inlines and memory log|Win32'">
+    <PreBuildEvent>
+      <Command>cd $(SolutionDir)\..
+"build\Win32\$(Configuration)\TypeInfo.exe" d3xp
+</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug with inlines|Win32'">
+    <PreBuildEvent>
+      <Command>cd $(SolutionDir)\..
+"build\Win32\$(Configuration)\TypeInfo.exe" d3xp
+</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug with inlines|Win32'">
+    <PreBuildEvent>
+      <Command>cd $(SolutionDir)\..
+"build\Win32\$(Configuration)\TypeInfo.exe" d3xp
+</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Debug|Win32'">
+    <PreBuildEvent>
+      <Command>cd $(SolutionDir)\..
+"build\Win32\$(Configuration)\TypeInfo.exe" d3xp
+</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dedicated Release|Win32'">
+    <PreBuildEvent>
+      <Command>cd $(SolutionDir)\..
+"build\Win32\$(Configuration)\TypeInfo.exe" d3xp
+</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <ClCompile>
+      <PreprocessorDefinitions>USE_SDL;STEAM;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>steam;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <MultiProcessorCompilation>Yes</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>steam_api.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Link>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>steam;sdl2\lib\win32</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release NO STEAM|Win32'">
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <ClCompile>
+      <PreprocessorDefinitions>USE_SDL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>steam;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <MultiProcessorCompilation>Yes</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Link>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>steam;sdl2\lib\win32</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="d3xp\airlock.cpp" />
+    <ClCompile Include="d3xp\ai\AAS.cpp" />
+    <ClCompile Include="d3xp\ai\AAS_debug.cpp" />
+    <ClCompile Include="d3xp\ai\AAS_pathing.cpp" />
+    <ClCompile Include="d3xp\ai\AAS_routing.cpp" />
+    <ClCompile Include="d3xp\ai\AI.cpp" />
+    <ClCompile Include="d3xp\ai\AI_events.cpp" />
+    <ClCompile Include="d3xp\ai\AI_pathing.cpp" />
+    <ClCompile Include="d3xp\ai\AI_Vagary.cpp" />
+    <ClCompile Include="d3xp\animloop.cpp" />
+    <ClCompile Include="d3xp\anim\Anim.cpp" />
+    <ClCompile Include="d3xp\anim\Anim_Blend.cpp" />
+    <ClCompile Include="d3xp\anim\Anim_Import.cpp" />
+    <ClCompile Include="d3xp\anim\Anim_Testmodel.cpp" />
+    <ClCompile Include="d3xp\bluebox.cpp" />
+    <ClCompile Include="d3xp\button_switcher.cpp" />
+    <ClCompile Include="d3xp\camerapoint.cpp" />
+    <ClCompile Include="d3xp\camturret.cpp" />
+    <ClCompile Include="d3xp\clock.cpp" />
+    <ClCompile Include="d3xp\commentary.cpp" />
+    <ClCompile Include="d3xp\contractcamera.cpp" />
+    <ClCompile Include="d3xp\countdowntimer.cpp" />
+    <ClCompile Include="d3xp\cybervendor.cpp" />
+    <ClCompile Include="d3xp\doorfolding.cpp" />
+    <ClCompile Include="d3xp\frobcube.cpp" />
+    <ClCompile Include="d3xp\gamesys\Class.cpp" />
+    <ClCompile Include="d3xp\gamesys\DebugGraph.cpp" />
+    <ClCompile Include="d3xp\gamesys\Event.cpp" />
+    <ClCompile Include="d3xp\gamesys\SaveGame.cpp" />
+    <ClCompile Include="d3xp\gamesys\SysCmds.cpp" />
+    <ClCompile Include="d3xp\gamesys\SysCvar.cpp" />
+    <ClCompile Include="d3xp\gamesys\TypeInfo.cpp" />
+    <ClCompile Include="d3xp\itemgate.cpp" />
+    <ClCompile Include="d3xp\jellypoint.cpp" />
+    <ClCompile Include="d3xp\keypad.cpp" />
+    <ClCompile Include="d3xp\laserwire.cpp" />
+    <ClCompile Include="d3xp\launcher.cpp" />
+    <ClCompile Include="d3xp\lever.cpp" />
+    <ClCompile Include="d3xp\panel.cpp" />
+    <ClCompile Include="d3xp\physics\Clip.cpp" />
+    <ClCompile Include="d3xp\physics\Force.cpp" />
+    <ClCompile Include="d3xp\physics\Force_Constant.cpp" />
+    <ClCompile Include="d3xp\physics\Force_Drag.cpp" />
+    <ClCompile Include="d3xp\physics\Force_Field.cpp" />
+    <ClCompile Include="d3xp\physics\Force_Grab.cpp" />
+    <ClCompile Include="d3xp\physics\Force_Spring.cpp" />
+    <ClCompile Include="d3xp\physics\Physics.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_Actor.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_AF.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_Base.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_Monster.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_Parametric.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_Player.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_RigidBody.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_Static.cpp" />
+    <ClCompile Include="d3xp\physics\Physics_StaticMulti.cpp" />
+    <ClCompile Include="d3xp\physics\Push.cpp" />
+    <ClCompile Include="d3xp\picker.cpp" />
+    <ClCompile Include="d3xp\powersawgeneric.cpp" />
+    <ClCompile Include="d3xp\powerscrewgeneric.cpp" />
+    <ClCompile Include="d3xp\qglass.cpp" />
+    <ClCompile Include="d3xp\rotdoor.cpp" />
+    <ClCompile Include="d3xp\screw.cpp" />
+    <ClCompile Include="d3xp\script\Script_Compiler.cpp" />
+    <ClCompile Include="d3xp\script\Script_Interpreter.cpp" />
+    <ClCompile Include="d3xp\script\Script_Program.cpp" />
+    <ClCompile Include="d3xp\script\Script_Thread.cpp" />
+    <ClCompile Include="d3xp\Actor.cpp" />
+    <ClCompile Include="d3xp\AF.cpp" />
+    <ClCompile Include="d3xp\AFEntity.cpp" />
+    <ClCompile Include="d3xp\BrittleFracture.cpp" />
+    <ClCompile Include="d3xp\Camera.cpp" />
+    <ClCompile Include="d3xp\Entity.cpp" />
+    <ClCompile Include="d3xp\Fx.cpp" />
+    <ClCompile Include="d3xp\Game_local.cpp" />
+    <ClCompile Include="d3xp\Game_network.cpp" />
+    <ClCompile Include="d3xp\GameEdit.cpp" />
+    <ClCompile Include="d3xp\Grabber.cpp" />
+    <ClCompile Include="d3xp\IK.cpp" />
+    <ClCompile Include="d3xp\Item.cpp" />
+    <ClCompile Include="d3xp\Light.cpp" />
+    <ClCompile Include="d3xp\Misc.cpp" />
+    <ClCompile Include="d3xp\Moveable.cpp" />
+    <ClCompile Include="d3xp\Mover.cpp" />
+    <ClCompile Include="d3xp\MultiplayerGame.cpp" />
+    <ClCompile Include="d3xp\Player.cpp" />
+    <ClCompile Include="d3xp\PlayerIcon.cpp" />
+    <ClCompile Include="d3xp\PlayerView.cpp" />
+    <ClCompile Include="d3xp\sentry.cpp" />
+    <ClCompile Include="d3xp\steamleaderboard.cpp" />
+    <ClCompile Include="d3xp\steamremote.cpp" />
+    <ClCompile Include="d3xp\steamstats.cpp" />
+    <ClCompile Include="d3xp\tablefold.cpp" />
+    <ClCompile Include="d3xp\trembler.cpp" />
+    <ClCompile Include="d3xp\turret.cpp" />
+    <ClCompile Include="d3xp\weevil.cpp" />
+    <ClCompile Include="d3xp\worldmanager.cpp" />
+    <ClCompile Include="d3xp\worldman_moveable.cpp" />
+    <ClCompile Include="d3xp\zeppelinbig.cpp" />
+    <ClCompile Include="idlib\precompiled.cpp" />
+    <ClCompile Include="d3xp\Projectile.cpp" />
+    <ClCompile Include="d3xp\Pvs.cpp" />
+    <ClCompile Include="d3xp\SecurityCamera.cpp" />
+    <ClCompile Include="d3xp\SmokeParticles.cpp" />
+    <ClCompile Include="d3xp\Sound.cpp" />
+    <ClCompile Include="d3xp\Target.cpp" />
+    <ClCompile Include="d3xp\Trigger.cpp" />
+    <ClCompile Include="d3xp\Weapon.cpp" />
+    <ClCompile Include="d3xp\WorldSpawn.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="d3xp\airlock.h" />
+    <ClInclude Include="d3xp\ai\AAS.h" />
+    <ClInclude Include="d3xp\ai\AAS_local.h" />
+    <ClInclude Include="d3xp\ai\AI.h" />
+    <ClInclude Include="d3xp\animloop.h" />
+    <ClInclude Include="d3xp\anim\Anim.h" />
+    <ClInclude Include="d3xp\anim\Anim_Testmodel.h" />
+    <ClInclude Include="d3xp\bluebox.h" />
+    <ClInclude Include="d3xp\button_switcher.h" />
+    <ClInclude Include="d3xp\camerapoint.h" />
+    <ClInclude Include="d3xp\camturret.h" />
+    <ClInclude Include="d3xp\clock.h" />
+    <ClInclude Include="d3xp\commentary.h" />
+    <ClInclude Include="d3xp\contractcamera.h" />
+    <ClInclude Include="d3xp\countdowntimer.h" />
+    <ClInclude Include="d3xp\cybervendor.h" />
+    <ClInclude Include="d3xp\doorfolding.h" />
+    <ClInclude Include="d3xp\frobcube.h" />
+    <ClInclude Include="d3xp\gamesys\Class.h" />
+    <ClInclude Include="d3xp\gamesys\DebugGraph.h" />
+    <ClInclude Include="d3xp\gamesys\Event.h" />
+    <ClInclude Include="d3xp\gamesys\NoGameTypeInfo.h" />
+    <ClInclude Include="d3xp\gamesys\SaveGame.h" />
+    <ClInclude Include="d3xp\gamesys\SysCmds.h" />
+    <ClInclude Include="d3xp\gamesys\SysCvar.h" />
+    <ClInclude Include="d3xp\itemgate.h" />
+    <ClInclude Include="d3xp\jellypoint.h" />
+    <ClInclude Include="d3xp\keypad.h" />
+    <ClInclude Include="d3xp\laserwire.h" />
+    <ClInclude Include="d3xp\launcher.h" />
+    <ClInclude Include="d3xp\lever.h" />
+    <ClInclude Include="d3xp\panel.h" />
+    <ClInclude Include="d3xp\physics\Clip.h" />
+    <ClInclude Include="d3xp\physics\Force.h" />
+    <ClInclude Include="d3xp\physics\Force_Constant.h" />
+    <ClInclude Include="d3xp\physics\Force_Drag.h" />
+    <ClInclude Include="d3xp\physics\Force_Field.h" />
+    <ClInclude Include="d3xp\physics\Force_Grab.h" />
+    <ClInclude Include="d3xp\physics\Force_Spring.h" />
+    <ClInclude Include="d3xp\physics\Physics.h" />
+    <ClInclude Include="d3xp\physics\Physics_Actor.h" />
+    <ClInclude Include="d3xp\physics\Physics_AF.h" />
+    <ClInclude Include="d3xp\physics\Physics_Base.h" />
+    <ClInclude Include="d3xp\physics\Physics_Monster.h" />
+    <ClInclude Include="d3xp\physics\Physics_Parametric.h" />
+    <ClInclude Include="d3xp\physics\Physics_Player.h" />
+    <ClInclude Include="d3xp\physics\Physics_RigidBody.h" />
+    <ClInclude Include="d3xp\physics\Physics_Static.h" />
+    <ClInclude Include="d3xp\physics\Physics_StaticMulti.h" />
+    <ClInclude Include="d3xp\physics\Push.h" />
+    <ClInclude Include="d3xp\picker.h" />
+    <ClInclude Include="d3xp\powersawgeneric.h" />
+    <ClInclude Include="d3xp\powerscrewgeneric.h" />
+    <ClInclude Include="d3xp\qglass.h" />
+    <ClInclude Include="d3xp\rotdoor.h" />
+    <ClInclude Include="d3xp\screw.h" />
+    <ClInclude Include="d3xp\script\Script_Compiler.h" />
+    <ClInclude Include="d3xp\script\Script_Interpreter.h" />
+    <ClInclude Include="d3xp\script\Script_Program.h" />
+    <ClInclude Include="d3xp\script\Script_Thread.h" />
+    <ClInclude Include="d3xp\Actor.h" />
+    <ClInclude Include="d3xp\AF.h" />
+    <ClInclude Include="d3xp\AFEntity.h" />
+    <ClInclude Include="d3xp\BrittleFracture.h" />
+    <ClInclude Include="d3xp\Camera.h" />
+    <ClInclude Include="d3xp\Entity.h" />
+    <ClInclude Include="d3xp\Fx.h" />
+    <ClInclude Include="d3xp\Game.h" />
+    <ClInclude Include="d3xp\Game_local.h" />
+    <ClInclude Include="d3xp\GameEdit.h" />
+    <ClInclude Include="d3xp\Grabber.h" />
+    <ClInclude Include="d3xp\IK.h" />
+    <ClInclude Include="d3xp\Item.h" />
+    <ClInclude Include="d3xp\Light.h" />
+    <ClInclude Include="d3xp\Misc.h" />
+    <ClInclude Include="d3xp\Moveable.h" />
+    <ClInclude Include="d3xp\Mover.h" />
+    <ClInclude Include="d3xp\MultiplayerGame.h" />
+    <ClInclude Include="d3xp\Player.h" />
+    <ClInclude Include="d3xp\PlayerIcon.h" />
+    <ClInclude Include="d3xp\PlayerView.h" />
+    <ClInclude Include="d3xp\Projectile.h" />
+    <ClInclude Include="d3xp\Pvs.h" />
+    <ClInclude Include="d3xp\SecurityCamera.h" />
+    <ClInclude Include="d3xp\sentry.h" />
+    <ClInclude Include="d3xp\SmokeParticles.h" />
+    <ClInclude Include="d3xp\Sound.h" />
+    <ClInclude Include="d3xp\steamleaderboard.h" />
+    <ClInclude Include="d3xp\steamremote.h" />
+    <ClInclude Include="d3xp\steamstats.h" />
+    <ClInclude Include="d3xp\tablefold.h" />
+    <ClInclude Include="d3xp\Target.h" />
+    <ClInclude Include="d3xp\trembler.h" />
+    <ClInclude Include="d3xp\Trigger.h" />
+    <ClInclude Include="d3xp\turret.h" />
+    <ClInclude Include="d3xp\Weapon.h" />
+    <ClInclude Include="d3xp\weevil.h" />
+    <ClInclude Include="d3xp\worldmanager.h" />
+    <ClInclude Include="d3xp\worldman_moveable.h" />
+    <ClInclude Include="d3xp\WorldSpawn.h" />
+    <ClInclude Include="d3xp\zeppelinbig.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="d3xp\Game.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="idlib.vcxproj">
+      <Project>{49bec5c6-b964-417a-851e-808886b57400}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="typeinfo.vcxproj">
+      <Project>{6ea6406f-3e65-47d9-8246-d6660a81606f}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
