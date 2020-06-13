@@ -1,4 +1,3 @@
-*.props
 *.user
 *.suo
 *.ncb
@@ -8,6 +7,7 @@
 *.plg
 *.opt
 *.db
+*.opensdf
 .vs/
 debug/
 debugaxp/
