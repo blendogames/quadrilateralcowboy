@@ -3439,15 +3439,15 @@ idFile *idFileSystemLocal::OpenFileWrite( const char *relativePath, const char *
 
 	OSpath = BuildOSPath( path, gameFolder, relativePath );
 
-	if ( fs_debug.GetInteger() ) {
+	//if ( fs_debug.GetInteger() ) {
 		common->Printf( "idFileSystem::OpenFileWrite: %s\n", OSpath.c_str() );
-	}
+	//}
 
 	// if the dir we are writing to is in our current list, it will be outdated
 	// so just flush everything
 	ClearDirCache();
 
-	common->DPrintf( "writing to: %s\n", OSpath.c_str() );
+	common->Printf( "writing to: %s\n", OSpath.c_str() );
 	CreateOSPath( OSpath );
 
 	f = new idFile_Permanent();
