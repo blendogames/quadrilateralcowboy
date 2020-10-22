@@ -4725,7 +4725,7 @@ idPlayer::GiveVideo
 */
 void idPlayer::GiveVideo( const char *videoName, idDict *item ) {
 
-	if ( videoName == NULL || *videoName == NULL ) {
+	if ( videoName == NULL || *videoName == '\0' ) {
 		return;
 	}
 
@@ -4762,7 +4762,7 @@ idPlayer::GiveEmail
 */
 void idPlayer::GiveEmail( const char *emailName ) {
 
-	if ( emailName == NULL || *emailName == NULL ) {
+	if ( emailName == NULL || *emailName == '\0' ) {
 		return;
 	}
 
@@ -4789,7 +4789,7 @@ void idPlayer::GivePDA( const char *pdaName, idDict *item )
 		inventory.pdaSecurity.AddUnique( item->GetString( "inv_name" ) );
 	}
 
-	if ( pdaName == NULL || *pdaName == NULL ) {
+	if ( pdaName == NULL || *pdaName == '\0' ) {
 		pdaName = "personal";
 	}
 
@@ -7993,7 +7993,7 @@ void idPlayer::UpdatePDAInfo( bool updatePDASel ) {
 
 		const char *security = pda->GetSecurity();
 		if ( j == currentPDA || (currentPDA == 0 && security && *security ) ) {
-			if ( *security == NULL ) {
+			if ( *security == '\0' ) {
 				security = common->GetLanguageDict()->GetString( "#str_00066" );
 			}
 			objectiveSystem->SetStateString( "PDASecurityClearance", security );
@@ -8610,7 +8610,7 @@ void idPlayer::PerformImpulse( int impulse ) {
 
 		case IMPULSE_17: {
 
-#ifdef STEAM && DEBUG
+#if defined(STEAM) && defined(DEBUG)
 			//g_SteamRemote->DeleteAll();
 			g_SteamStats->ResetStats();
 

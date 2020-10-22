@@ -2,9 +2,9 @@
 ===========================================================================
 
 Doom 3 GPL Source Code
-Copyright (C) 1999-2011 id Software LLC, a ZeniMax Media company. 
+Copyright (C) 1999-2011 id Software LLC, a ZeniMax Media company.
 
-This file is part of the Doom 3 GPL Source Code (?Doom 3 Source Code?).  
+This file is part of the Doom 3 GPL Source Code ("Doom 3 Source Code").
 
 Doom 3 Source Code is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -72,10 +72,10 @@ idSimpleWindow::idSimpleWindow(idWindow *win) {
 	}
 	backGroundName.SetMaterialPtr(&background);
 
-// 
+//
 //  added parent
 	mParent = win->GetParent();
-// 
+//
 
 	hideCursor = win->hideCursor;
 
@@ -122,7 +122,7 @@ idSimpleWindow::~idSimpleWindow() {
 }
 
 void idSimpleWindow::StateChanged( bool redraw ) {
-	if ( redraw && background && background->CinematicLength() ) { 
+	if ( redraw && background && background->CinematicLength() ) {
 		background->UpdateCinematic( gui->GetTime() );
 	}
 }
@@ -189,7 +189,7 @@ void idSimpleWindow::CalcClientRect(float xofs, float yofs) {
 		drawRect.x = rect.x() - rect.w();
 		drawRect.y = rect.y() - rect.h();
 	}
-	
+
 	drawRect.x += xofs;
 	drawRect.y += yofs;
 
@@ -205,7 +205,7 @@ void idSimpleWindow::CalcClientRect(float xofs, float yofs) {
 
 		textRect = clientRect;
 		textRect.x += 2.0;
-	 	textRect.w -= 2.0;
+		textRect.w -= 2.0;
 		textRect.y += 2.0;
 		textRect.h -= 2.0;
 		textRect.x += textAlignx;
@@ -218,7 +218,7 @@ void idSimpleWindow::CalcClientRect(float xofs, float yofs) {
 
 
 void idSimpleWindow::Redraw(float x, float y) {
-	
+
 	if (!visible) {
 		return;
 	}
@@ -254,35 +254,35 @@ void idSimpleWindow::Redraw(float x, float y) {
 	textRect.Offset(-x, -y);
 }
 
-int idSimpleWindow::GetWinVarOffset( idWinVar *wv, drawWin_t* owner) {
-	int ret = -1;
+intptr_t idSimpleWindow::GetWinVarOffset( idWinVar *wv, drawWin_t* owner) {
+	intptr_t ret = -1;
 
 	if ( wv == &rect ) {
-		ret = (int)&( ( idSimpleWindow * ) 0 )->rect;
+		ret = (ptrdiff_t)&this->rect - (ptrdiff_t)this;
 	}
 
 	if ( wv == &backColor ) {
-		ret = (int)&( ( idSimpleWindow * ) 0 )->backColor;
+		ret = (ptrdiff_t)&this->backColor - (ptrdiff_t)this;
 	}
 
 	if ( wv == &matColor ) {
-		ret = (int)&( ( idSimpleWindow * ) 0 )->matColor;
+		ret = (ptrdiff_t)&this->matColor - (ptrdiff_t)this;
 	}
 
 	if ( wv == &foreColor ) {
-		ret = (int)&( ( idSimpleWindow * ) 0 )->foreColor;
+		ret = (ptrdiff_t)&this->foreColor - (ptrdiff_t)this;
 	}
 
 	if ( wv == &borderColor ) {
-		ret = (int)&( ( idSimpleWindow * ) 0 )->borderColor;
+		ret = (ptrdiff_t)&this->borderColor - (ptrdiff_t)this;
 	}
 
 	if ( wv == &textScale ) {
-		ret = (int)&( ( idSimpleWindow * ) 0 )->textScale;
+		ret = (ptrdiff_t)&this->textScale - (ptrdiff_t)this;
 	}
 
 	if ( wv == &rotate ) {
-		ret = (int)&( ( idSimpleWindow * ) 0 )->rotate;
+		ret = (ptrdiff_t)&this->rotate - (ptrdiff_t)this;
 	}
 
 	if ( ret != -1 ) {

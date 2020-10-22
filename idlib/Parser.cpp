@@ -1294,7 +1294,9 @@ typedef struct operator_s
 
 typedef struct value_s
 {
-	signed long int intvalue;
+	// flibit: 64 bit fix, remove long keyword
+	int intvalue;
+	// flibit end
 	double floatvalue;
 	int parentheses;
 	struct value_s *prev, *next;
@@ -1365,7 +1367,9 @@ int PC_OperatorPriority(int op) {
 
 #define FreeOperator(op)
 
-int idParser::EvaluateTokens( idToken *tokens, signed long int *intvalue, double *floatvalue, int integer ) {
+// flibit: 64 bit fix, remove long keyword
+int idParser::EvaluateTokens( idToken *tokens, int *intvalue, double *floatvalue, int integer ) {
+// flibit end
 	operator_t *o, *firstoperator, *lastoperator;
 	value_t *v, *firstvalue, *lastvalue, *v1, *v2;
 	idToken *t;
@@ -1790,7 +1794,9 @@ int idParser::EvaluateTokens( idToken *tokens, signed long int *intvalue, double
 idParser::Evaluate
 ================
 */
-int idParser::Evaluate( signed long int *intvalue, double *floatvalue, int integer ) {
+// flibit: 64 bit fix, remove long keyword
+int idParser::Evaluate( int *intvalue, double *floatvalue, int integer ) {
+// flibit end
 	idToken token, *firsttoken, *lasttoken;
 	idToken *t, *nexttoken;
 	define_t *define;
@@ -1881,7 +1887,9 @@ int idParser::Evaluate( signed long int *intvalue, double *floatvalue, int integ
 idParser::DollarEvaluate
 ================
 */
-int idParser::DollarEvaluate( signed long int *intvalue, double *floatvalue, int integer) {
+// flibit: 64 bit fix, remove long keyword
+int idParser::DollarEvaluate( int *intvalue, double *floatvalue, int integer) {
+// flibit end
 	int indent, defined = false;
 	idToken token, *firsttoken, *lasttoken;
 	idToken *t, *nexttoken;
@@ -1983,7 +1991,9 @@ idParser::Directive_elif
 ================
 */
 int idParser::Directive_elif( void ) {
-	signed long int value;
+	// flibit: 64 bit fix, remove long keyword
+	int value;
+	// flibit end
 	int type, skip;
 
 	idParser::PopIndent( &type, &skip );
@@ -2005,7 +2015,9 @@ idParser::Directive_if
 ================
 */
 int idParser::Directive_if( void ) {
-	signed long int value;
+	// flibit: 64 bit fix, remove long keyword
+	int value;
+	// flibit end
 	int skip;
 
 	if ( !idParser::Evaluate( &value, NULL, true ) ) {
@@ -2101,7 +2113,9 @@ idParser::Directive_eval
 ================
 */
 int idParser::Directive_eval( void ) {
-	signed long int value;
+	// flibit: 64 bit fix, remove long keyword
+	int value;
+	// flibit end
 	idToken token;
 	char buf[128];
 
@@ -2240,7 +2254,9 @@ idParser::DollarDirective_evalint
 ================
 */
 int idParser::DollarDirective_evalint( void ) {
-	signed long int value;
+	// flibit: 64 bit fix, remove long keyword
+	int value;
+	// flibit end
 	idToken token;
 	char buf[128];
 
@@ -2289,7 +2305,9 @@ int idParser::DollarDirective_evalfloat( void ) {
 	token = buf;
 	token.type = TT_NUMBER;
 	token.subtype = TT_FLOAT | TT_LONG | TT_DECIMAL | TT_VALUESVALID;
-	token.intvalue = (unsigned long) fabs( value );
+	// flibit: 64 bit fix, changed long to int
+	token.intvalue = (unsigned int) fabs( value );
+	// flibit end
 	token.floatvalue = fabs( value );
 	idParser::UnreadSourceToken( &token );
 	if ( value < 0 ) {

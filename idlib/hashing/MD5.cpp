@@ -257,10 +257,12 @@ void MD5_Final( MD5_CTX *ctx, unsigned char digest[16] ) {
 MD5_BlockChecksum
 ===============
 */
-unsigned long MD5_BlockChecksum( const void *data, int length ) {
-	unsigned long	digest[4];
-	unsigned long	val;
+// flibit: 64 bit fix, changed long to int
+unsigned int MD5_BlockChecksum( const void *data, int length ) {
+	unsigned int	digest[4];
+	unsigned int	val;
 	MD5_CTX			ctx;
+// flibit end
 
 	MD5_Init( &ctx );
 	MD5_Update( &ctx, (unsigned char *)data, length );

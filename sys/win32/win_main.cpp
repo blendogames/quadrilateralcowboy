@@ -665,12 +665,14 @@ DLL Loading
 ========================================================================
 */
 
+// flibit: 64 bit fix, changed int to void*
+
 /*
 =====================
 Sys_DLL_Load
 =====================
 */
-int Sys_DLL_Load( const char *dllName ) {
+void* Sys_DLL_Load( const char *dllName ) {
 	HINSTANCE	libHandle;
 	libHandle = LoadLibrary( dllName );
 	if ( libHandle ) {
@@ -679,11 +681,11 @@ int Sys_DLL_Load( const char *dllName ) {
 		GetModuleFileName( libHandle, loadedPath, sizeof( loadedPath ) - 1 );
 		if ( idStr::IcmpPath( dllName, loadedPath ) ) {
 			Sys_Printf( "ERROR: LoadLibrary '%s' wants to load '%s'\n", dllName, loadedPath );
-			Sys_DLL_Unload( (int)libHandle );
+			Sys_DLL_Unload( libHandle );
 			return 0;
 		}
 	}
-	return (int)libHandle;
+	return (void*)libHandle;
 }
 
 /*
@@ -691,7 +693,7 @@ int Sys_DLL_Load( const char *dllName ) {
 Sys_DLL_GetProcAddress
 =====================
 */
-void *Sys_DLL_GetProcAddress( int dllHandle, const char *procName ) {
+void *Sys_DLL_GetProcAddress( void* dllHandle, const char *procName ) {
 	return GetProcAddress( (HINSTANCE)dllHandle, procName ); 
 }
 
@@ -700,7 +702,7 @@ void *Sys_DLL_GetProcAddress( int dllHandle, const char *procName ) {
 Sys_DLL_Unload
 =====================
 */
-void Sys_DLL_Unload( int dllHandle ) {
+void Sys_DLL_Unload( void* dllHandle ) {
 	if ( !dllHandle ) {
 		return;
 	}
@@ -719,6 +721,8 @@ void Sys_DLL_Unload( int dllHandle ) {
 		Sys_Error( "Sys_DLL_Unload: FreeLibrary failed - %s (%d)", lpMsgBuf, lastError );
 	}
 }
+
+// flibit end
 
 /*
 ========================================================================

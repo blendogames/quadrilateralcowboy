@@ -42,7 +42,9 @@ static idStr				Maya_Error;
 
 static exporterInterface_t	Maya_ConvertModel = NULL;
 static exporterShutdown_t	Maya_Shutdown = NULL;
-static int					importDLL = 0;
+// flibit: 64 bit fix, changed int to void*
+static void*			importDLL = NULL;
+// flibit end
 
 bool idModelExport::initialized = false;
 

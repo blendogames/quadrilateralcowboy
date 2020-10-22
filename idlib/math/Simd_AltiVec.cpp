@@ -68,8 +68,8 @@ If you have questions concerning this license or the applicable additional terms
 #define IDVEC4_OFFSET 4
 
 // Alignment tests
-#define IS_16BYTE_ALIGNED( x ) ( ( (unsigned long)&x & 0x0F ) == 0 )	
-#define NOT_16BYTE_ALIGNED( x ) ( ( (unsigned long)&x & 0x0F) != 0 )
+#define IS_16BYTE_ALIGNED( x ) ( ( (unsigned int)&x & 0x0F ) == 0 )	
+#define NOT_16BYTE_ALIGNED( x ) ( ( (unsigned int)&x & 0x0F) != 0 )
 
 // Aligned storing floats
 #define ALIGNED_STORE2( ADDR, V0, V1 )			\
@@ -7134,7 +7134,7 @@ void VPCALL idSIMD_AltiVec::DeriveTangents( idPlane *planes, idDrawVert *verts, 
 	idPlane *planesPtr = planes;
 	for ( i = 0; i < numIndexes; i += 3 ) {
 		idDrawVert *a, *b, *c;
-	//	unsigned long signBit;
+	//	unsigned int signBit;
 		float d0[5], d1[5], area;
 		idVec3 n, t0, t1;
 		float f1, f2, f3;

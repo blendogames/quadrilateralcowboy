@@ -198,7 +198,7 @@ private:
 	idStrList					warningList;
 	idStrList					errorList;
 
-	int							gameDLL;
+	void *						gameDLL;
 
 	idLangDict					languageDict;
 

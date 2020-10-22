@@ -355,7 +355,9 @@ void idSoundSystemLocal::Init() {
 	}
 
 	// make a 16 byte aligned finalMixBuffer
-	finalMixBuffer = (float *) ( ( ( (int)realAccum ) + 15 ) & ~15 );
+	// flibit: 64 bit fix, changed int to intptr_t
+	finalMixBuffer = (float *) ( ( ( (intptr_t)realAccum ) + 15 ) & ~15 );
+	// flibit end
 
 	graph = NULL;
 
@@ -494,7 +496,9 @@ void idSoundSystemLocal::Shutdown() {
 			alDeleteSources( 1, &openalSources[i].handle );
 
 			// clear entry in source array
-			openalSources[i].handle = NULL;
+			// flibit: 64 bit fix, changed NULL to 0
+			openalSources[i].handle = 0;
+			// flibit end
 			openalSources[i].startTime = 0;
 			openalSources[i].chan = NULL;
 			openalSources[i].inUse = false;
@@ -1269,7 +1273,9 @@ ALuint idSoundSystemLocal::AllocOpenALSource( idSoundChannel *chan, bool looping
 
 		return openalSources[index].handle;
 	} else {
-		return NULL;
+		// flibit: 64 bit fix, changed NULL to 0
+		return 0;
+		// flibit end
 	}
 }
 
@@ -1283,7 +1289,9 @@ void idSoundSystemLocal::FreeOpenALSource( ALuint handle ) {
 	for ( i = 0; i < openalSourceCount; i++ ) {
 		if ( openalSources[i].handle == handle ) {
 			if ( openalSources[i].chan ) {
-				openalSources[i].chan->openalSource = NULL;
+				// flibit: 64 bit fix, changed NULL to 0
+				openalSources[i].chan->openalSource = 0;
+				// flibit end
 			}
 #if ID_OPENAL
 			// Reset source EAX ROOM level when freeing stereo source

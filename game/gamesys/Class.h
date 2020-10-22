@@ -2,9 +2,9 @@
 ===========================================================================
 
 Doom 3 GPL Source Code
-Copyright (C) 1999-2011 id Software LLC, a ZeniMax Media company. 
+Copyright (C) 1999-2011 id Software LLC, a ZeniMax Media company.
 
-This file is part of the Doom 3 GPL Source Code (?Doom 3 Source Code?).  
+This file is part of the Doom 3 GPL Source Code ("Doom 3 Source Code").
 
 Doom 3 Source Code is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -57,16 +57,16 @@ struct idEventFunc {
 class idEventArg {
 public:
 	int			type;
-	int			value;
+	intptr_t	value;
 
 	idEventArg()								{ type = D_EVENT_INTEGER; value = 0; };
 	idEventArg( int data )						{ type = D_EVENT_INTEGER; value = data; };
 	idEventArg( float data )					{ type = D_EVENT_FLOAT; value = *reinterpret_cast<int *>( &data ); };
-	idEventArg( idVec3 &data )					{ type = D_EVENT_VECTOR; value = reinterpret_cast<int>( &data ); };
-	idEventArg( const idStr &data )				{ type = D_EVENT_STRING; value = reinterpret_cast<int>( data.c_str() ); };
-	idEventArg( const char *data )				{ type = D_EVENT_STRING; value = reinterpret_cast<int>( data ); };
-	idEventArg( const class idEntity *data )	{ type = D_EVENT_ENTITY; value = reinterpret_cast<int>( data ); };
-	idEventArg( const struct trace_s *data )	{ type = D_EVENT_TRACE; value = reinterpret_cast<int>( data ); };
+	idEventArg( idVec3 &data )					{ type = D_EVENT_VECTOR; value = reinterpret_cast<intptr_t>( &data ); };
+	idEventArg( const idStr &data )				{ type = D_EVENT_STRING; value = reinterpret_cast<intptr_t>( data.c_str() ); };
+	idEventArg( const char *data )				{ type = D_EVENT_STRING; value = reinterpret_cast<intptr_t>( data ); };
+	idEventArg( const class idEntity *data )	{ type = D_EVENT_ENTITY; value = reinterpret_cast<intptr_t>( data ); };
+	idEventArg( const struct trace_s *data )	{ type = D_EVENT_TRACE; value = reinterpret_cast<intptr_t>( data ); };
 };
 
 class idAllocError : public idException {
@@ -102,7 +102,7 @@ CLASS_DECLARATION
 
 This macro must be included in the code to properly initialize variables
 used in type checking and run-time instanciation.  It also defines the list
-of events that the class responds to.  Take special care to ensure that the 
+of events that the class responds to.  Take special care to ensure that the
 proper superclass is indicated or the run-time type information will be
 incorrect.  Use this on concrete classes only.
 ================
@@ -230,7 +230,7 @@ public:
 	bool						ProcessEvent( const idEventDef *ev, idEventArg arg1, idEventArg arg2, idEventArg arg3, idEventArg arg4, idEventArg arg5, idEventArg arg6, idEventArg arg7 );
 	bool						ProcessEvent( const idEventDef *ev, idEventArg arg1, idEventArg arg2, idEventArg arg3, idEventArg arg4, idEventArg arg5, idEventArg arg6, idEventArg arg7, idEventArg arg8 );
 
-	bool						ProcessEventArgPtr( const idEventDef *ev, int *data );
+	bool						ProcessEventArgPtr( const idEventDef *ev, intptr_t *data );
 	void						CancelEvents( const idEventDef *ev );
 
 	void						Event_Remove( void );
@@ -287,7 +287,7 @@ public:
 
 	idHierarchy<idTypeInfo>		node;
 
-								idTypeInfo( const char *classname, const char *superclass, 
+								idTypeInfo( const char *classname, const char *superclass,
 												idEventFunc<idClass> *eventCallbacks, idClass *( *CreateInstance )( void ), void ( idClass::*Spawn )( void ),
 												void ( idClass::*Save )( idSaveGame *savefile ) const, void	( idClass::*Restore )( idRestoreGame *savefile ) );
 								~idTypeInfo();
@@ -303,7 +303,7 @@ public:
 ================
 idTypeInfo::IsType
 
-Checks if the object's class is a subclass of the class defined by the 
+Checks if the object's class is a subclass of the class defined by the
 passed in idTypeInfo.
 ================
 */
@@ -330,7 +330,7 @@ ID_INLINE bool idTypeInfo::RespondsTo( const idEventDef &ev ) const {
 ================
 idClass::IsType
 
-Checks if the object's class is a subclass of the class defined by the 
+Checks if the object's class is a subclass of the class defined by the
 passed in idTypeInfo.
 ================
 */

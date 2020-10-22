@@ -118,7 +118,7 @@ bool idEFXFile::ReadEffect( idLexer &src, idSoundEffect *effect ) {
 
 				if ( token == "environment" ) {
 					src.ReadTokenOnLine( &token );
-					reverb->ulEnvironment = token.GetUnsignedLongValue();
+					reverb->ulEnvironment = token.GetUnsignedIntValue();
 				} else if ( token == "environment size" ) {
 					reverb->flEnvironmentSize = src.ParseFloat();
 				} else if ( token == "environment diffusion" ) {
@@ -169,7 +169,7 @@ bool idEFXFile::ReadEffect( idLexer &src, idSoundEffect *effect ) {
 					reverb->flRoomRolloffFactor = src.ParseFloat();
 				} else if ( token == "flags" ) {
 					src.ReadTokenOnLine( &token );
-					reverb->ulFlags = token.GetUnsignedLongValue();
+					reverb->ulFlags = token.GetUnsignedIntValue();
 				} else {
 					src.ReadTokenOnLine( &token );
 					src.Error( "idEFXFile::ReadEffect: Invalid parameter in reverb definition" );

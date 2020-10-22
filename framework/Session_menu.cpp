@@ -350,13 +350,13 @@ void idSessionLocal::SetModsMenuGuiVars( void ) {
 			descPath.Append(PATH_SLASH"description.txt");
 
 			//generate a relative folder path.
-			int foldernameIndex = idStr::FindText(modpaths[i], PATH_SLASH"steamapps"PATH_SLASH"workshop"PATH_SLASH, false);
+			int foldernameIndex = idStr::FindText(modpaths[i], PATH_SLASH "steamapps" PATH_SLASH "workshop" PATH_SLASH, false);
 			int steamappsFolderLength = 10;
 			modpaths[i] = modpaths[i].Right(modpaths[i].Length() - foldernameIndex - steamappsFolderLength);
 #ifdef __APPLE__
-            modpaths[i] = ".."PATH_SLASH".."PATH_SLASH".."PATH_SLASH".."PATH_SLASH".." + modpaths[i]; //append the ..
+            modpaths[i] = ".." PATH_SLASH ".." PATH_SLASH ".." PATH_SLASH ".." PATH_SLASH ".." + modpaths[i]; //append the ..
 #else
-			modpaths[i] = ".."PATH_SLASH".." + modpaths[i]; //append the ..
+			modpaths[i] = ".." PATH_SLASH ".." + modpaths[i]; //append the ..
 #endif
 
 #undef PATH_SLASH

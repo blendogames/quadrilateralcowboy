@@ -2676,8 +2676,10 @@ default surface is created.
 int lwResolvePolySurfaces( lwPolygonList *polygon, lwTagList *tlist,
    lwSurface **surf, int *nsurfs )
 {
+   // flibit: 64 bit fix, changed int to intptr_t
    lwSurface **s, *st;
-   int i, index;
+   int i;
+   intptr_t index;
 
    if ( tlist->count == 0 ) return 1;
 
@@ -2696,7 +2698,7 @@ int lwResolvePolySurfaces( lwPolygonList *polygon, lwTagList *tlist,
    }
 
    for ( i = 0; i < polygon->count; i++ ) {
-      index = ( int ) polygon->pol[ i ].surf;
+      index = ( intptr_t ) polygon->pol[ i ].surf;
       if ( index < 0 || index > tlist->count ) return 0;
       if ( !s[ index ] ) {
          s[ index ] = lwDefaultSurface();
@@ -2712,6 +2714,7 @@ int lwResolvePolySurfaces( lwPolygonList *polygon, lwTagList *tlist,
 
    Mem_Free( s );
    return 1;
+   // flibit end
 }
 
 

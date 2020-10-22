@@ -392,7 +392,7 @@ extern void CL_Quit_f(void);
 - (BOOL)checkOS
 {
 	OSErr	err;
-	long gestaltOSVersion;
+	int gestaltOSVersion;
 	err = Gestalt(gestaltSystemVersion, &gestaltOSVersion);
 	if ( err || gestaltOSVersion < 0x1038 ) {
 		NSBundle *thisBundle = [ NSBundle mainBundle ];
@@ -486,6 +486,8 @@ const char *Sys_GetProcessorString( void ) {
 	return "ppc CPU with AltiVec extensions";
 #elif defined(__i386__)
 	return "x86 CPU with MMX/SSE/SSE2/SSE3 extensions";
+#elif defined(__x86_64__)
+	return "x86_64 CPU";
 #else
 	#error
 	return NULL;
@@ -513,8 +515,8 @@ enum {
 
 typedef union {
 	struct {
-		unsigned long hi;
-		unsigned long lo;
+		unsigned int hi;
+		unsigned int lo;
 	} i;
 	double d;
 } hexdouble;
@@ -656,13 +658,13 @@ Sys_ClockTicksPerSecond
 double Sys_ClockTicksPerSecond(void) {
 	// Our strategy is to query both Gestalt & IOKit and then take the larger of the two values.
 	
-	long gestaltSpeed, ioKitSpeed = -1;
+	int gestaltSpeed, ioKitSpeed = -1;
 	
 	// GESTALT
 	
 	// gestaltProcClkSpeedMHz available in 10.3 needs to be used because CPU speeds have now
-	// exceeded the signed long that Gestalt returns.
-	long osVers;
+	// exceeded the signed int that Gestalt returns.
+	int osVers;
 	OSErr err;
 	Gestalt(gestaltSystemVersion, &osVers);
 	if (osVers >= 0x1030)
@@ -699,7 +701,7 @@ double Sys_ClockTicksPerSecond(void) {
 		{
 			CFDataRef data = (CFDataRef)IORegistryEntryCreateCFProperty(ioCpu, CFSTR("clock-frequency"),kCFAllocatorDefault,0);
 			if (data)
-				ioKitSpeed = *((unsigned long*)CFDataGetBytePtr(data)) / 1000000;
+				ioKitSpeed = *((unsigned int*)CFDataGetBytePtr(data)) / 1000000;
 		}
 		service = IOIteratorNext(itThis);
 	}
@@ -717,7 +719,7 @@ returns in megabytes
 ================
 */
 int Sys_GetSystemRam( void ) {
-	long ramSize;
+	int ramSize;
 	
 	if ( Gestalt( gestaltPhysicalRAMSize, &ramSize ) == noErr ) {
 		return ramSize / (1024*1024);
@@ -735,7 +737,7 @@ returns in megabytes
 int Sys_GetVideoRam( void ) {
 	unsigned int i;
 	CFTypeRef typeCode;
-	long vramStorage = 64;
+	int vramStorage = 64;
 	const short MAXDISPLAYS = 8;
 	CGDisplayCount displayCount;
 	io_service_t dspPorts[MAXDISPLAYS];
@@ -763,7 +765,7 @@ int Sys_GetVideoRam( void ) {
 
 bool OSX_GetCPUIdentification( int& cpuId, bool& oldArchitecture )
 {
-	long cpu;
+	int cpu;
 	Gestalt(gestaltNativeCPUtype, &cpu);
 	
 	cpuId = cpu;
@@ -816,8 +818,8 @@ void OSX_GetVideoCard( int& outVendorId, int& outDeviceId )
 			    vendorID = (CFDataRef)IORegistryEntryCreateCFProperty(service, CFSTR("vendor-id"),kCFAllocatorDefault,0);
 			    deviceID = (CFDataRef)IORegistryEntryCreateCFProperty(service, CFSTR("device-id"),kCFAllocatorDefault,0);
 			    
-			    outVendorId = *((long*)CFDataGetBytePtr(vendorID));
-			    outDeviceId = *((long*)CFDataGetBytePtr(deviceID));
+			    outVendorId = *((int*)CFDataGetBytePtr(vendorID));
+			    outDeviceId = *((int*)CFDataGetBytePtr(deviceID));
 				
 				CFRelease(vendorID);
 				CFRelease(deviceID);
@@ -947,6 +949,7 @@ static pascal OSStatus RegCodeHandler( EventHandlerCallRef inHandler, EventRef i
  */
 static OSErr DoRegCodeDialog( char* ioRegCode1 )
 {
+#if 0 // Eat my Ass-pyr -flibit
 	OSErr err;
 	RegCodeInfo regCodeInfo;
 	memset(&regCodeInfo, 0, sizeof(regCodeInfo));
@@ -980,6 +983,7 @@ static OSErr DoRegCodeDialog( char* ioRegCode1 )
 	}
 	
 	return regCodeInfo.okPressed ? (OSErr)noErr : (OSErr)userCanceledErr;	
+#endif // 0
 }
 
 /*
@@ -1016,7 +1020,7 @@ void Sys_FPU_SetFTZ( bool enable ) {
 }
 
 
-#elif defined(__i386__)
+#elif defined(__i386__) || defined(__x86_64__)
 
 #include <xmmintrin.h>
 

@@ -2936,7 +2936,9 @@ const char *idMat6::ToString( int precision ) const {
 //===============================================================
 
 float	idMatX::temp[MATX_MAX_TEMP+4];
-float *	idMatX::tempPtr = (float *) ( ( (int) idMatX::temp + 15 ) & ~15 );
+// flibit: 64 bit fix, changed int to intptr_t
+float *	idMatX::tempPtr = (float *) ( ( (intptr_t) idMatX::temp + 15 ) & ~15 );
+// flibit end
 int		idMatX::tempIndex = 0;
 
 

@@ -563,7 +563,9 @@ int idTypeInfoTools::WriteVariable_r( const void *varPtr, const char *varName, c
 	// if this is a pointer
 	isPointer = 0;
 	for ( i = typeString.Length(); i > 0 && typeString[i - 1] == '*'; i -= 2 ) {
-		if ( varPtr == (void *)0xcdcdcdcd || ( varPtr != NULL && *((unsigned long *)varPtr) == 0xcdcdcdcd ) ) {
+		// flibit: 64 bit fix, changed long to int
+		if ( varPtr == (void *)0xcdcdcdcd || ( varPtr != NULL && *((unsigned int *)varPtr) == 0xcdcdcdcd ) ) {
+		// flibit end
 			common->Warning( "%s%s::%s%s references uninitialized memory", prefix, scope, varName, "" );
 			return typeSize;
 		}
@@ -1129,7 +1131,9 @@ int idTypeInfoTools::WriteVariable_r( const void *varPtr, const char *varName, c
 
 	i = 0;
 	do {
-		if ( *((unsigned long *)varPtr) == 0xcdcdcdcd ) {
+		// flibit: 64 bit fix, changed long to int
+		if ( *((unsigned int *)varPtr) == 0xcdcdcdcd ) {
+		// flibit end
 			common->Warning( "%s%s::%s%s uses uninitialized memory", prefix, scope, varName, "" );
 			break;
 		}
