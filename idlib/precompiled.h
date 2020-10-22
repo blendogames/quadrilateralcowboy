@@ -114,8 +114,14 @@ using std::min;
 
 #ifdef _WIN32 // TODO: have main for windows match mac/linux
 #define SDL_MAIN_HANDLED 1
-#endif
 #include "../sdl2/include/SDL.h"
+#else
+#ifdef __APPLE__
+#include <SDL.h>
+#else
+#include <SDL2/SDL.h> // Really should just be SDL.h but oh welllll -flibit
+#endif
+#endif
 
 // non-portable system services
 #include "../sys/sys_public.h"

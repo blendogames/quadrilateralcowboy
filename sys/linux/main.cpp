@@ -266,7 +266,14 @@ double Sys_GetClockTicks( void ) {
 						  : "=r" (lo), "=r" (hi) );
 	return (double) lo + (double) 0xFFFFFFFF * hi;
 #else
-#error unsupported CPU
+//#error unsupported CPU
+// RB begin
+        struct timespec now;
+
+        clock_gettime( CLOCK_MONOTONIC, &now );
+
+        return now.tv_sec * 1000000000LL + now.tv_nsec;
+// RB end
 #endif
 }
 

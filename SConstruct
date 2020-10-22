@@ -152,7 +152,7 @@ EnsureSConsVersion( 0, 96 )
 cpu = commands.getoutput('uname -m')
 exp = re.compile('.*i?86.*')
 if exp.match(cpu):
-	cpu = 'x86'
+	cpu = 'x86_64'
 else:
 	cpu = commands.getoutput('uname -p')
 	if ( cpu == 'powerpc' ):
@@ -290,8 +290,9 @@ OPTCPPFLAGS = [ ]
 BASECPPFLAGS.append( BASEFLAGS )
 BASECPPFLAGS.append( '-pipe' )
 # warn all
-BASECPPFLAGS.append( '-Wall' )
+# flibit removed: BASECPPFLAGS.append( '-Wall' )
 BASECPPFLAGS.append( '-Wno-unknown-pragmas' )
+BASECPPFLAGS.append( '-Wno-write-strings' )
 # this define is necessary to make sure threading support is enabled in X
 CORECPPFLAGS.append( '-DXTHREADS' )
 # don't wrap gcc messages
@@ -303,10 +304,11 @@ if ( g_os == 'Linux' ):
 	# gcc 4.x option only - only export what we mean to from the game SO
 	BASECPPFLAGS.append( '-fvisibility=hidden' )
 	# get the 64 bits machine on the distcc array to produce 32 bit binaries :)
-	BASECPPFLAGS.append( '-m32' )
-	BASELINKFLAGS.append( '-m32' )
+	# BASECPPFLAGS.append( '-m32' )
+	# BASELINKFLAGS.append( '-m32' )
 	#rpath
-	BASELINKFLAGS.append( '-Wl,-rpath=\$$ORIGIN/lib' )
+	#BASELINKFLAGS.append( '-Wl,-rpath=\$$ORIGIN/lib' )
+	BASELINKFLAGS.append( '-Wl,-rpath=\$$ORIGIN/lib64' )
 
 if ( g_sdk or SDK != '0' ):
 	BASECPPFLAGS.append( '-D_D3SDK' )
@@ -322,10 +324,11 @@ elif ( BUILD == 'debug' ):
 elif ( BUILD == 'release' ):
 	# -fomit-frame-pointer: "-O also turns on -fomit-frame-pointer on machines where doing so does not interfere with debugging."
 	#   on x86 have to set it explicitely
+	# -march=pentium3: flibit removed this, wtf 2004
 	# -finline-functions: implicit at -O3
 	# -fschedule-insns2: implicit at -O2
 	# no-unsafe-math-optimizations: that should be on by default really. hit some wonko bugs in physics code because of that
-	OPTCPPFLAGS = [ '-O3', '-march=pentium3', '-Winline', '-ffast-math', '-fno-unsafe-math-optimizations', '-fomit-frame-pointer' ]
+	OPTCPPFLAGS = [ '-O3', '-Winline', '-ffast-math', '-fno-unsafe-math-optimizations', '-fomit-frame-pointer' ]
 	if ( ID_MCHECK == '0' ):
 		ID_MCHECK = '2'
 else:

@@ -38,8 +38,31 @@ If you have questions concerning this license or the applicable additional terms
 */
 
 
+// Win64
+#if defined(_WIN64)
+
+#define	BUILD_STRING					"win-x64"
+#define BUILD_OS_ID						0
+#define	CPUSTRING						"x64"
+#define CPU_EASYARGS					0
+
+#define ALIGN16( x )					__declspec(align(16)) x
+#define PACKED
+
+// flibit: 64 bit fix, changed int to intptr_t
+#define _alloca16( x )					((void *)((((intptr_t)_alloca( (x)+15 )) + 15) & ~15))
+// flibit end
+
+#define PATHSEPERATOR_STR				"\\"
+#define PATHSEPERATOR_CHAR				'\\'
+
+#define ID_INLINE						__forceinline
+#define ID_STATIC_TEMPLATE				static
+
+#define assertmem( x, y )				assert( _CrtIsValidPointer( x, y, true ) )
+
 // Win32
-#if defined(WIN32) || defined(_WIN32)
+#elif defined(WIN32) || defined(_WIN32)
 
 #define	BUILD_STRING					"win-x86"
 #define BUILD_OS_ID						0
@@ -49,7 +72,9 @@ If you have questions concerning this license or the applicable additional terms
 #define ALIGN16( x )					__declspec(align(16)) x
 #define PACKED
 
-#define _alloca16( x )					((void *)((((int)_alloca( (x)+15 )) + 15) & ~15))
+// flibit: 64 bit fix, changed int to intptr_t
+#define _alloca16( x )					((void *)((((intptr_t)_alloca( (x)+15 )) + 15) & ~15))
+// flibit end
 
 #define PATHSEPERATOR_STR				"\\"
 #define PATHSEPERATOR_CHAR				'\\'
@@ -72,6 +97,11 @@ If you have questions concerning this license or the applicable additional terms
 #elif defined(__i386__)
 	#define	CPUSTRING					"x86"
 	#define CPU_EASYARGS				1
+#elif defined(__x86_64__)
+	#define	CPUSTRING					"x86_64"
+	#define CPU_EASYARGS				0
+#else
+#error Unrecognized CPU arch!
 #endif
 
 #define ALIGN16( x )					x __attribute__ ((aligned (16)))
@@ -84,7 +114,9 @@ If you have questions concerning this license or the applicable additional terms
 #endif
 
 #define _alloca							alloca
-#define _alloca16( x )					((void *)((((int)alloca( (x)+15 )) + 15) & ~15))
+// flibit: 64 bit fix, changed int to intptr_t
+#define _alloca16( x )					((void *)((((intptr_t)alloca( (x)+15 )) + 15) & ~15))
+// flibit end
 
 #define PATHSEPERATOR_STR				"/"
 #define PATHSEPERATOR_CHAR				'/'
@@ -108,14 +140,23 @@ If you have questions concerning this license or the applicable additional terms
 	#define BUILD_OS_ID					2
 	#define CPUSTRING					"x86"
 	#define CPU_EASYARGS				1
+#elif defined(__x86_64__)
+	#define BUILD_STRING				"linux-x86_64"
+	#define BUILD_OS_ID					2
+	#define CPUSTRING					"x86_64"
+	#define CPU_EASYARGS				0
 #elif defined(__ppc__)
 	#define	BUILD_STRING				"linux-ppc"
 	#define CPUSTRING					"ppc"
 	#define CPU_EASYARGS				0
+#else
+#error Unrecognized CPU arch!
 #endif
 
 #define _alloca							alloca
-#define _alloca16( x )					((void *)((((int)alloca( (x)+15 )) + 15) & ~15))
+// flibit: 64 bit fix, changed int to intptr_t
+#define _alloca16( x )					((void *)((((intptr_t)alloca( (x)+15 )) + 15) & ~15))
+// flibit end
 
 #define ALIGN16( x )					x
 #define PACKED							__attribute__((packed))
@@ -379,9 +420,11 @@ const char *	Sys_GetCallStackCurAddressStr( int depth );
 void			Sys_ShutdownSymbols( void );
 
 // DLL loading, the path should be a fully qualified OS path to the DLL file to be loaded
-int				Sys_DLL_Load( const char *dllName );
-void *			Sys_DLL_GetProcAddress( int dllHandle, const char *procName );
-void			Sys_DLL_Unload( int dllHandle );
+// flibit: 64 bit fix, change int to void*
+void *			Sys_DLL_Load( const char *dllName );
+void *			Sys_DLL_GetProcAddress( void* dllHandle, const char *procName );
+void			Sys_DLL_Unload( void* dllHandle );
+// flibit end
 
 // event generation
 void			Sys_GenerateEvents( void );
@@ -547,7 +590,9 @@ typedef enum {
 
 typedef struct {
 	const char *	name;
-	int				threadHandle;
+	// flibit: 64 bit fix, changed int to intptr_t
+	intptr_t	threadHandle;
+	// flibit end
 	unsigned long	threadId;
 } xthreadInfo;
 
@@ -618,10 +663,12 @@ public:
 	virtual const char *	GetCallStackCurStr( int depth ) = 0;
 	virtual void			ShutdownSymbols( void ) = 0;
 
-	virtual int				DLL_Load( const char *dllName ) = 0;
-	virtual void *			DLL_GetProcAddress( int dllHandle, const char *procName ) = 0;
-	virtual void			DLL_Unload( int dllHandle ) = 0;
+	// flibit: 64 bit fix, changed int to void*
+	virtual void *			DLL_Load( const char *dllName ) = 0;
+	virtual void *			DLL_GetProcAddress( void* dllHandle, const char *procName ) = 0;
+	virtual void			DLL_Unload( void* dllHandle ) = 0;
 	virtual void			DLL_GetFileName( const char *baseName, char *dllName, int maxLength ) = 0;
+	// flibit end
 
 	virtual sysEvent_t		GenerateMouseButtonEvent( int button, bool down ) = 0;
 	virtual sysEvent_t		GenerateMouseMoveEvent( int deltax, int deltay ) = 0;

@@ -1399,7 +1399,9 @@ bool idImage::CheckPrecompressedImage( bool fullLoad ) {
 
 	fileSystem->CloseFile( f );
 
-	unsigned long magic = LittleLong( *(unsigned long *)data );
+	// flibit: 64 bit fix, changed long to int
+	unsigned int magic = LittleLong( *(unsigned int *)data );
+	// flibit end
 	ddsFileHeader_t	*_header = (ddsFileHeader_t *)(data + 4);
 	int ddspf_dwFlags = LittleLong( _header->ddspf.dwFlags );
 

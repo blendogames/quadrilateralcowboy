@@ -457,8 +457,10 @@ idActor::idActor( void ) {
 	allowEyeFocus		= false;
 
 	waitState			= "";
-	
-	blink_anim			= NULL;
+
+	// flibit: 64 bit fix, change NULL to 0
+	blink_anim			= 0;
+	// flibit end
 	blink_time			= 0;
 	blink_min			= 0;
 	blink_max			= 0;
@@ -3171,11 +3173,13 @@ idActor::Event_HasAnim
 ================
 */
 void idActor::Event_HasAnim( int channel, const char *animname ) {
-	if ( GetAnim( channel, animname ) != NULL ) {
+	// flibit: 64 bit fix, change NULL to 0
+	if ( GetAnim( channel, animname ) != 0 ) {
 		idThread::ReturnFloat( 1.0f );
 	} else {
 		idThread::ReturnFloat( 0.0f );
 	}
+	// flibit end
 }
 
 /*

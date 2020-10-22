@@ -90,7 +90,9 @@ public:
 
 	double			GetDoubleValue( void );				// double value of TT_NUMBER
 	float			GetFloatValue( void );				// float value of TT_NUMBER
-	unsigned long	GetUnsignedLongValue( void );		// unsigned long value of TT_NUMBER
+	// flibit: 64 bit fix, changed to GetUnsignedIntValue
+	unsigned int	GetUnsignedIntValue( void );		// unsigned long value of TT_NUMBER
+	// flibit end
 	int				GetIntValue( void );				// int value of TT_NUMBER
 	int				WhiteSpaceBeforeToken( void ) const;// returns length of whitespace before token
 	void			ClearTokenWhiteSpace( void );		// forget whitespace before token
@@ -98,7 +100,7 @@ public:
 	void			NumberValue( void );				// calculate values for a TT_NUMBER
 
 private:
-	unsigned long	intvalue;							// integer value
+	unsigned int	intvalue;							// integer value
 	double			floatvalue;							// floating point value
 	const char *	whiteSpaceStart_p;					// start of white space before token, only used by idLexer
 	const char *	whiteSpaceEnd_p;					// end of white space before token, only used by idLexer
@@ -139,7 +141,8 @@ ID_INLINE float idToken::GetFloatValue( void ) {
 	return (float) GetDoubleValue();
 }
 
-ID_INLINE unsigned long	idToken::GetUnsignedLongValue( void ) {
+// flibit: 64 bit fix, GetUnsignedIntValue
+ID_INLINE unsigned int	idToken::GetUnsignedIntValue( void ) {
 	if ( type != TT_NUMBER ) {
 		return 0;
 	}
@@ -148,9 +151,10 @@ ID_INLINE unsigned long	idToken::GetUnsignedLongValue( void ) {
 	}
 	return intvalue;
 }
+// flibit end
 
 ID_INLINE int idToken::GetIntValue( void ) {
-	return (int) GetUnsignedLongValue();
+	return (int) GetUnsignedIntValue();
 }
 
 ID_INLINE int idToken::WhiteSpaceBeforeToken( void ) const {

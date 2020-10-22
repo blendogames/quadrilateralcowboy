@@ -745,7 +745,7 @@ void idInterpreter::CallEvent( const function_t *func, int argsize ) {
 		switch( format[ i ] ) {
 		case D_EVENT_INTEGER :
 			var.intPtr = ( int * )&localstack[ start + pos ];
-			data[ i ] = int( *var.floatPtr );
+			( *( int * )&data[ i ] ) = int( *var.floatPtr );
 			break;
 
 		case D_EVENT_FLOAT :

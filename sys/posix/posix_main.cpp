@@ -382,13 +382,15 @@ void Posix_Shutdown( void ) {
 	}
 }
 
+// flibit: 64 bit fix, changed int to void*
+
 /*
 =================
 Sys_DLL_Load
 TODO: OSX - use the native API instead? NSModule
 =================
 */
-int Sys_DLL_Load( const char *path ) {
+void* Sys_DLL_Load( const char *path ) {
 	int mode = RTLD_NOW;
 #ifdef __APPLE__ // NOTE: genenv starts crashing after I dlclose game.dylib >:-(
 	mode |= RTLD_NODELETE;
@@ -397,7 +399,7 @@ int Sys_DLL_Load( const char *path ) {
 	if ( !handle ) {
 		Sys_Printf( "dlopen '%s' failed: %s\n", path, dlerror() );
 	}
-	return (int)handle;
+	return handle;
 }
 
 /*
@@ -405,9 +407,9 @@ int Sys_DLL_Load( const char *path ) {
 Sys_DLL_GetProcAddress
 =================
 */
-void* Sys_DLL_GetProcAddress( int handle, const char *sym ) {
+void* Sys_DLL_GetProcAddress( void* handle, const char *sym ) {
 	const char *error;
-	void *ret = dlsym( (void *)handle, sym );
+	void *ret = dlsym( handle, sym );
 	if ((error = dlerror()) != NULL)  {
 		Sys_Printf( "dlsym '%s' failed: %s\n", sym, error );
 	}
@@ -419,9 +421,11 @@ void* Sys_DLL_GetProcAddress( int handle, const char *sym ) {
 Sys_DLL_Unload
 =================
 */
-void Sys_DLL_Unload( int handle ) {
-	dlclose( (void *)handle );
+void Sys_DLL_Unload( void* handle ) {
+	dlclose( handle );
 }
+
+// flibit end
 
 /*
 ================

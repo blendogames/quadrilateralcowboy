@@ -235,7 +235,9 @@ idDict::Checksum
 ================
 */
 int	idDict::Checksum( void ) const {
-	unsigned long ret;
+	// RB: 64 bit fixes, changed long to int
+	unsigned int ret;
+	// RB end
 	int i, n;
 
 	idList<idKeyValue> sorted = args;
@@ -475,7 +477,9 @@ int idDict::FindKeyIndex( const char *key ) const {
 
 	if ( key == NULL || key[0] == '\0' ) {
 		idLib::common->DWarning( "idDict::FindKeyIndex: empty key" );
-		return NULL;
+		// flibit: 64 bit fix, change NULL to 0
+		return 0;
+		// flibit end
 	}
 
 	int hash = argHash.GenerateKey( key, false );

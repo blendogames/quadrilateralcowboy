@@ -202,7 +202,9 @@ void idPicker::StartDrag( idEntity *grabEnt, int id ) {
 			
 		}
 
-		grabEnt->PostEventMS( &EV_Touch, 250, thePlayer, NULL );
+		// flibit: 64 bit fixes, changed NULL to 0
+		grabEnt->PostEventMS( &EV_Touch, 250, thePlayer, 0 );
+		// flibit end
 
 	}
 	

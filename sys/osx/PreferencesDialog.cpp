@@ -419,6 +419,7 @@ static void BuildRefreshRates(CGDirectDisplayID inDisplayID, int inWidth, int in
 
 static void BuildRefreshPopupButton(ControlRef inControl, std::list<Fixed>* inList)
 {
+#if 0 // Eat my Ass-pyr -flibit
 	MenuRef menu = GetControlPopupMenuRef(inControl);
 	assert(menu);
 	if (!menu) return;
@@ -434,6 +435,7 @@ static void BuildRefreshPopupButton(ControlRef inControl, std::list<Fixed>* inLi
 	}
 	
 	SetControlMaximum(inControl, CountMenuItems(menu));
+#endif
 }
 
 static SInt32 FindRefreshPopupMenuItem(std::list<Fixed>* inList, Fixed inFrequency)
@@ -450,6 +452,7 @@ static SInt32 FindRefreshPopupMenuItem(std::list<Fixed>* inList, Fixed inFrequen
 
 static void BuildResolutionPopupButton(ControlRef inControl, CGDirectDisplayID inDisplayID, ValidModeCallbackProc inCallback)
 {
+#if 0 // Eat my Ass-pyr -flibit
 	// Get the list of valid resolutions
 	int count = BuildResolutionList(inDisplayID, NULL, inCallback);
 	Res resList[count];
@@ -472,10 +475,12 @@ static void BuildResolutionPopupButton(ControlRef inControl, CGDirectDisplayID i
 	}
 	
 	SetControlMaximum(inControl, CountMenuItems(menu));
+#endif
 }
 
 static void GetResolutionFromPopupMenuItem(ControlRef inControl, MenuItemIndex inItem, int *outX, int *outY, int *outDepth, UInt32 *outResFlags)
 {
+#if 0 // Eat my Ass-pyr -flibit
 	MenuRef menu = GetControlPopupMenuRef(inControl);
 	Res res;
 	OSStatus err;
@@ -488,10 +493,12 @@ static void GetResolutionFromPopupMenuItem(ControlRef inControl, MenuItemIndex i
 		*outResFlags = res.resFlags;
 		*outDepth = 32;
 	}
+#endif
 }
 
 static void AdjustResolutionPopupMenu(ControlRef inControl, CGDirectDisplayID inDisplayID, bool isFullscreen, int& screenwidth, int& screenheight, int& screendepth, UInt32& screenResFlags)
 {
+#if 0 // Eat my Ass-pyr -flibit
 	int screenX = INT_MAX, screenY = INT_MAX;
 
 	// In windowed mode, you have to disable resolutions that are larger than the current screen size
@@ -533,10 +540,12 @@ static void AdjustResolutionPopupMenu(ControlRef inControl, CGDirectDisplayID in
 			}
 		}
 	}
+#endif
 }
 
 static void AdjustDisplayControls(PrefInfo *prefInfo)
 {
+#if 0 // Eat my Ass-pyr -flibit
 	// Build new resolution popup and select appropriate resolution
 	if ((prefInfo->prefGameDisplayMode != kFullScreen))
 	{
@@ -577,12 +586,16 @@ static void AdjustDisplayControls(PrefInfo *prefInfo)
 		DisableControl (prefInfo->refreshRatePopup);
 	else
 		EnableControl (prefInfo->refreshRatePopup);
+#endif
 }
 
 #pragma mark -
 
 static pascal OSStatus PrefHandler( EventHandlerCallRef inHandler, EventRef inEvent, void* inUserData )
 {
+#if 1
+	return eventNotHandledErr;
+#else // Eat my Ass-pyr -flibit
 	#pragma unused( inHandler )
 	
 	HICommand			cmd;
@@ -699,6 +712,7 @@ static pascal OSStatus PrefHandler( EventHandlerCallRef inHandler, EventRef inEv
 
 	}	
 	return result;
+#endif
 }
 
 #pragma mark -
@@ -709,6 +723,8 @@ OSStatus CreateGameDisplayPreferencesDialog(const GameDisplayInfo *inGDInfo,
 											WindowRef *outWindow, ValidModeCallbackProc inCallback)
 {
 	OSStatus err = noErr;
+
+#if 0 // Eat my Ass-pyr -flibit
 	
 	// Build up a structure to pass to the window handler we are about
 	// to install. We store the window itself, as well as the original
@@ -798,6 +814,7 @@ OSStatus CreateGameDisplayPreferencesDialog(const GameDisplayInfo *inGDInfo,
 	
 	if (outWindow)
 		*outWindow = prefInfo.window;
+#endif
 	
 	return err;
 }
@@ -810,6 +827,7 @@ OSStatus CreateGameDisplayPreferencesDialog(const GameDisplayInfo *inGDInfo,
 
 OSStatus RunGameDisplayPreferencesDialog(GameDisplayInfo *outGDInfo, WindowRef inWindow)
 {
+#if 0 // Eat my Ass-pyr -flibit
 	PrefInfo *prefInfo = (PrefInfo*)GetWRefCon(inWindow);
 	
 	ShowWindow( inWindow );
@@ -838,6 +856,8 @@ OSStatus RunGameDisplayPreferencesDialog(GameDisplayInfo *outGDInfo, WindowRef i
 	}
 	
 	return prefInfo->okPressed ? noErr : userCanceledErr;
+#endif
+	return noErr;
 }
 
 

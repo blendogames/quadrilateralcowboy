@@ -384,7 +384,9 @@ const char *idVec6::ToString( int precision ) const {
 //===============================================================
 
 float	idVecX::temp[VECX_MAX_TEMP+4];
-float *	idVecX::tempPtr = (float *) ( ( (int) idVecX::temp + 15 ) & ~15 );
+// flibit: 64 bit fix, changed int to intptr_t
+float *	idVecX::tempPtr = (float *) ( ( (intptr_t) idVecX::temp + 15 ) & ~15 );
+// flibit end
 int		idVecX::tempIndex = 0;
 
 /*

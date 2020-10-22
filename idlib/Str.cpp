@@ -170,7 +170,9 @@ void idStr::operator=( const char *text ) {
 		return;
 	}
 
-	l = strlen( text );
+	// RB: 64 bit fixes,  conversion from 'size_t' to 'int', possible loss of data
+	l = ( int )strlen( text );
+	// RB end
 	EnsureAlloced( l + 1, false );
 	strcpy( data, text );
 	len = l;
@@ -187,7 +189,9 @@ int idStr::FindChar( const char *str, const char c, int start, int end ) {
 	int i;
 
 	if ( end == -1 ) {
-		end = strlen( str ) - 1;
+		// RB: 64 bit fixes,  conversion from 'size_t' to 'int', possible loss of data
+		end = ( int )strlen( str ) - 1;
+		// RB end
 	}
 	for ( i = start; i <= end; i++ ) {
 		if ( str[i] == c ) {
@@ -208,9 +212,13 @@ int idStr::FindText( const char *str, const char *text, bool casesensitive, int 
 	int l, i, j;
 
 	if ( end == -1 ) {
-		end = strlen( str );
+		// RB: 64 bit fixes,  conversion from 'size_t' to 'int', possible loss of data
+		end = ( int )strlen( str );
+		// RB end
 	}
-	l = end - strlen( text );
+	// RB: 64 bit fixes,  conversion from 'size_t' to 'int', possible loss of data
+	l = end - ( int )strlen( text );
+	// RB end
 	for ( i = start; i <= l; i++ ) {
 		if ( casesensitive ) {
 			for ( j = 0; text[j]; j++ ) {
@@ -481,7 +489,9 @@ idStr::StripLeading
 void idStr::StripLeading( const char *string ) {
 	int l;
 
-	l = strlen( string );
+	// RB: 64 bit fixes,  conversion from 'size_t' to 'int', possible loss of data
+	l = ( int )strlen( string );
+	// RB end
 	if ( l > 0 ) {
 		while ( !Cmpn( string, l ) ) {
 			memmove( data, data + l, len - l + 1 );
@@ -498,7 +508,9 @@ idStr::StripLeadingOnce
 bool idStr::StripLeadingOnce( const char *string ) {
 	int l;
 
-	l = strlen( string );
+	// RB: 64 bit fixes,  conversion from 'size_t' to 'int', possible loss of data
+	l = ( int )strlen( string );
+	// RB end
 	if ( ( l > 0 ) && !Cmpn( string, l ) ) {
 		memmove( data, data + l, len - l + 1 );
 		len -= l;
@@ -529,7 +541,9 @@ idStr::StripLeading
 void idStr::StripTrailing( const char *string ) {
 	int l;
 
-	l = strlen( string );
+	// RB: 64 bit fixes,  conversion from 'size_t' to 'int', possible loss of data
+	l = ( int )strlen( string );
+	// RB end
 	if ( l > 0 ) {
 		while ( ( len >= l ) && !Cmpn( string, data + len - l, l ) ) {
 			len -= l;
@@ -546,7 +560,9 @@ idStr::StripTrailingOnce
 bool idStr::StripTrailingOnce( const char *string ) {
 	int l;
 
-	l = strlen( string );
+	// RB: 64 bit fixes,  conversion from 'size_t' to 'int', possible loss of data
+	l = ( int )strlen( string );
+	// RB end
 	if ( ( l > 0 ) && ( len >= l ) && !Cmpn( string, data + len - l, l ) ) {
 		len -= l;
 		data[len] = '\0';
@@ -564,8 +580,10 @@ void idStr::Replace( const char *old, const char *nw ) {
 	int		oldLen, newLen, i, j, count;
 	idStr	oldString( data );
 
-	oldLen = strlen( old );
-	newLen = strlen( nw );
+	// RB: 64 bit fixes,  conversion from 'size_t' to 'int', possible loss of data
+	oldLen = ( int )strlen( old );
+	newLen = ( int )strlen( nw );
+	// RB end
 
 	// Work out how big the new string will be
 	count = 0;
@@ -591,7 +609,9 @@ void idStr::Replace( const char *old, const char *nw ) {
 			}
 		}
 		data[j] = 0;
-		len = strlen( data );
+		// RB: 64 bit fixes,  conversion from 'size_t' to 'int', possible loss of data
+		len = ( int )strlen( data );
+		// RB end
 	}
 }
 
@@ -698,8 +718,9 @@ idStr::FileNameHash
 ============
 */
 int idStr::FileNameHash( void ) const {
+	// flibit: 64 bit fix, changed long to int
 	int		i;
-	long	hash;
+	int	hash;
 	char	letter;
 
 	hash = 0;
@@ -712,11 +733,12 @@ int idStr::FileNameHash( void ) const {
 		if ( letter =='\\' ) {
 			letter = '/';
 		}
-		hash += (long)(letter)*(i+119);
+		hash += (int)(letter)*(i+119);
 		i++;
 	}
 	hash &= (FILE_HASH_SIZE-1);
 	return hash;
+	// flibit end
 }
 
 /*
@@ -833,7 +855,9 @@ void idStr::AppendPath( const char *text ) {
 
 	if ( text && text[i] ) {
 		pos = len;
-		EnsureAlloced( len + strlen( text ) + 2 );
+		// RB: 64 bit fixes,  conversion from 'size_t' to 'int', possible loss of data
+		EnsureAlloced( len + ( int )strlen( text ) + 2 );
+		// RB end
 
 		if ( pos ) {
 			if ( data[ pos-1 ] != '/' ) {
@@ -1397,7 +1421,9 @@ idStr::Append
 void idStr::Append( char *dest, int size, const char *src ) {
 	int		l1;
 
-	l1 = strlen( dest );
+	// RB: 64 bit fixes,  conversion from 'size_t' to 'int', possible loss of data
+	l1 = ( int )strlen( dest );
+	// RB end
 	if ( l1 >= size ) {
 		idLib::common->Error( "idStr::Append: already overflowed" );
 	}

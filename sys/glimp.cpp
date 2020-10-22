@@ -222,7 +222,11 @@ bool GLimp_Init(glimpParms_t parms) {
 				"Graphics Error",
 				"Your computer doesn't support 32bit color, 24bit depth and 8bit stencil.  Try installing latest graphics drivers",
 				NULL);
+#ifdef __APPLE__
+			exit(2);
+#else
 			_exit(2);
+#endif
 		}
 
 		if (SDL_GL_SetSwapInterval(r_swapInterval.GetInteger()) < 0)
