@@ -4,7 +4,7 @@ To build Quadrilateral Cowboy on a Debian-based Linux system, run the following 
 
 ```sh
 # install build tools
-$ apt install cmake m4
+$ apt install build-essential cmake m4
 
 # install compilation dependencies
 $ apt install libopenal-dev libsdl2-dev
