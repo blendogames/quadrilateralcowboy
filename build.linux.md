@@ -1,5 +1,7 @@
 # Build Instructions
 
+Quadrilateral Cowboy uses [flibit](https://icculus.org/finger/flibitijibibo)'s build system for Linux, and their homepage includes guidance on how to set up a CentOS Linux build environment.
+
 To build Quadrilateral Cowboy on a Debian-based Linux system, run the following commands:
 
 ```sh
