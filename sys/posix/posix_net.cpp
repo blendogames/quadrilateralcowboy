@@ -348,7 +348,9 @@ void Sys_InitNetworking(void)
 			if ( ifr->ifr_addr.sa_family != AF_INET ) {
 				common->Printf( "not AF_INET\n" );
 			} else {
-				ip = ntohl( *( unsigned long *)&ifr->ifr_addr.sa_data[2] );
+				unsigned long raw_ip;
+				memcpy( &raw_ip, &ifr->ifr_addr.sa_data[2], sizeof(unsigned long) );
+				ip = ntohl( raw_ip );
 				if ( ip == INADDR_LOOPBACK ) {
 					common->Printf( "loopback\n" );
 				} else {
@@ -361,7 +363,9 @@ void Sys_InitNetworking(void)
 				if ( ioctl( s, SIOCGIFNETMASK, ifr ) < 0 ) {
 					common->Printf( " SIOCGIFNETMASK failed: %s\n", strerror( errno ) );
 				} else {
-					mask = ntohl( *( unsigned long *)&ifr->ifr_addr.sa_data[2] );
+					unsigned long raw_mask;
+					memcpy( &raw_mask, &ifr->ifr_addr.sa_data[2], sizeof(unsigned long) );
+					mask = ntohl( raw_mask );
 					if ( ip != INADDR_LOOPBACK ) {
 						common->Printf( "/%d.%d.%d.%d\n",
 										(unsigned char)ifr->ifr_addr.sa_data[2],
