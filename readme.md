@@ -11,8 +11,8 @@ This source code is licensed under the [GNU General Public License](https://gith
 Please note this license only applies to Quadrilateral Cowboy's source code. Quadrilateral Cowboy's game assets (art, models, textures, audio, etc.) are not open-source.
 
 ## Credits
-- by [Brendon Chung](http://blendogames.com)
-- Additional design by [Tynan Wales](https://twitter.com/Whining)
+- art, code, design by [Brendon Chung](http://blendogames.com)
+- design by [Tynan Wales](https://twitter.com/Whining)
 - Mac/Linux port and additional programming by [Aaron Melcher](https://twitter.com/aaron_melcher)
 - Mac/Linux port of art book by [Ethan Lee](https://twitter.com/flibitijibibo)
 - based on [ioDoom3](https://github.com/iodoom/iod3)
