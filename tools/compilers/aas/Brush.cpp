@@ -55,7 +55,7 @@ void DisplayRealTimeString( char *string, ... ) {
 		va_start( argPtr, string );
 		vsprintf( buf, string, argPtr );
 		va_end( argPtr );
-		common->Printf( buf );
+		common->Printf( "%s", buf );
 		lastUpdateTime = time;
 	}
 }
