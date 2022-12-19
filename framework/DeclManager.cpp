@@ -1028,10 +1028,10 @@ void idDeclManagerLocal::LoadManual( )
 				pageB = 0;
 			}
 
-			f->Printf( "%s", va("skin manualpage_%d_%d\n{\nmodels/weapon_map/page_%d  %s\nmodels/weapon_map/page_%d  %s\n}\n\n",
+			f->Printf( "%s", "skin manualpage_%d_%d\n{\nmodels/weapon_map/page_%d  %s\nmodels/weapon_map/page_%d  %s\n}\n\n",
 				i, i+1,
 				pageA, imageNames[i].c_str(),
-				pageB, imageNames[i+1].c_str() ));
+				pageB, imageNames[i+1].c_str() );
 		}
 		
 		
