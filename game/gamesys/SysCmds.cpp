@@ -1213,7 +1213,7 @@ static void PrintFloat( float f ) {
 		buf[i] = ' ';
 	}
 	buf[i] = '\0';
-	gameLocal.Printf( buf );
+	gameLocal.Printf( "%s", buf );
 }
 
 /*
