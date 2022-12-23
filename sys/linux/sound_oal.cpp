@@ -42,7 +42,7 @@ public:
 	int		GetMixBufferSize( void )  { return 0; }
 	
 	int		GetNumberOfSpeakers( void ) {
-		idSoundSystemLocal::s_numberOfSpeakers.GetInteger();
+		return idSoundSystemLocal::s_numberOfSpeakers.GetInteger();
 	}
 
 	// doesn't support write API
