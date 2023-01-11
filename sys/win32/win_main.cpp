@@ -1515,7 +1515,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	common->Init( 0, NULL, lpCmdLine );
 
 #if TEST_FPU_EXCEPTIONS != 0
-	common->Printf( Sys_FPU_GetState() );
+	common->Printf( "%s", Sys_FPU_GetState() );
 #endif
 
 #ifndef	ID_DEDICATED
