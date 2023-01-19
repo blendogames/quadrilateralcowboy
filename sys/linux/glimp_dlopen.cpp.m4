@@ -1,6 +1,6 @@
-#include "idlib/precompiled.h"
-#include "renderer/tr_local.h"
-#include "sys/linux/local.h"
+#include "../../idlib/precompiled.h"
+#include "../../renderer/tr_local.h"
+#include "../../sys/linux/local.h"
 #include "glimp_local.h"
 
 #include <dlfcn.h>

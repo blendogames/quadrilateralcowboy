@@ -51,7 +51,7 @@ SET(CMAKE_INSTALL_RPATH ${BIN_RPATH})
 SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
 
 # Include Directories
-INCLUDE_DIRECTORIES(. sound/OggVorbis/vorbissrc/)
+INCLUDE_DIRECTORIES(sound/OggVorbis/vorbissrc/)
 
 # Source Lists
 SET(QC_SRC
