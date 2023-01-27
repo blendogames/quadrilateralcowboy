@@ -146,6 +146,10 @@ If you have questions concerning this license or the applicable additional terms
 	#define	BUILD_STRING				"linux-arm"
 	#define BUILD_OS_ID					2
 	#define CPUSTRING					"arm"
+#elif defined(__aarch64__)
+	#define	BUILD_STRING				"linux-arm64"
+	#define BUILD_OS_ID					2
+	#define CPUSTRING					"arm64"
 #else
 #error Unrecognized CPU arch!
 #endif
