@@ -2003,7 +2003,7 @@ void idFileSystemLocal::Path_f( const idCmdArgs &args ) {
 				} else {
 					status += ")\n";
 				}
-				common->Printf( status.c_str() );
+				common->Printf( "%s", status.c_str() );
 			}
 			else
 			{
@@ -3991,7 +3991,7 @@ void idFileSystemLocal::FindDLL( const char *name, char _dllPath[ MAX_OSPATH ], 
 	} else {
 		dllPath = "";
 	}
-	idStr::snPrintf( _dllPath, MAX_OSPATH, dllPath.c_str() );
+	idStr::snPrintf( _dllPath, MAX_OSPATH, "%s", dllPath.c_str() );
 }
 
 /*
