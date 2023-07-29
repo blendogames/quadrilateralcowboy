@@ -31,8 +31,8 @@ If you have questions concerning this license or the applicable additional terms
 
 // you need the OpenAL headers for build, even if AL is not enabled - http://www.openal.org/
 #if defined _WIN32 || defined __linux__
-#include "../openal/include/al.h"
-#include "../openal/include/alc.h"
+#include <AL/al.h>
+#include <AL/alc.h>
 #ifdef _WIN32
 #include "../openal/idal.h"
 #endif
