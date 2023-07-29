@@ -188,7 +188,7 @@ const char *idLexer::GetPunctuationFromId( int id ) {
 			return idLexer::punctuations[i].p;
 		}
 	}
-	return "unkown punctuation";
+	return "unknown punctuation";
 }
 
 /*
