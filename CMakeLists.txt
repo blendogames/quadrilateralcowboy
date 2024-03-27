@@ -1,7 +1,7 @@
 # CMake File for Quadrilateral Cowboy (Because scons and Xcode are butt)
 # Written by Ethan "flibitijibibo" Lee
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.1)
 PROJECT(QuadrilateralCowboy)
 
 # CMake Options
@@ -465,6 +465,10 @@ ENDIF()
 
 # Executable information
 ADD_EXECUTABLE(qc ${QC_SRC})
+
+set_target_properties(qc PROPERTIES
+    CXX_STANDARD 11
+    CXX_STANDARD_REQUIRED ON)
 
 # SDL2 Dependency (Detection pulled from FAudio)
 if (DEFINED SDL2_INCLUDE_DIRS AND DEFINED SDL2_LIBRARIES)
