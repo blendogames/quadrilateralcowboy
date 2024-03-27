@@ -583,19 +583,20 @@ static void LoadTGA( const char *name, byte **pic, int *width, int *height, ID_T
 	targa_header.colormap_type = *buf_p++;
 	targa_header.image_type = *buf_p++;
 	
-	targa_header.colormap_index = LittleShort ( *(short *)buf_p );
-	buf_p += 2;
-	targa_header.colormap_length = LittleShort ( *(short *)buf_p );
-	buf_p += 2;
+	auto const get_little_short = [&buf_p]() {
+		short tmp;
+		memcpy( &tmp, buf_p, sizeof( short ) );
+		short little_short = LittleShort ( tmp );
+		buf_p += 2;
+		return little_short;
+	};
+	targa_header.colormap_index = get_little_short();
+	targa_header.colormap_length = get_little_short();
 	targa_header.colormap_size = *buf_p++;
-	targa_header.x_origin = LittleShort ( *(short *)buf_p );
-	buf_p += 2;
-	targa_header.y_origin = LittleShort ( *(short *)buf_p );
-	buf_p += 2;
-	targa_header.width = LittleShort ( *(short *)buf_p );
-	buf_p += 2;
-	targa_header.height = LittleShort ( *(short *)buf_p );
-	buf_p += 2;
+	targa_header.x_origin = get_little_short();
+	targa_header.y_origin = get_little_short();
+	targa_header.width = get_little_short();
+	targa_header.height = get_little_short();
 	targa_header.pixel_size = *buf_p++;
 	targa_header.attributes = *buf_p++;
 
