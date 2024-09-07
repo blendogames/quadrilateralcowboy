@@ -108,7 +108,7 @@ If you have questions concerning this license or the applicable additional terms
 // atm, we have no useful way to reconstruct the trace, so let's leave it off
 #define ID_BT_STUB
 #ifndef ID_BT_STUB
-	#if defined( __linux__ )
+	#if defined( __unix__ ) && !defined(MACOS_X)
 		#if defined( _DEBUG )
 			#define ID_BT_STUB
 		#endif

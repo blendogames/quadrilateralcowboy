@@ -366,7 +366,8 @@ void idSoundSystemLocal::Init() {
 		soundCache = new idSoundCache();
 	}
 
-#if defined(__linux__) || defined(__APPLE__)
+// Changed this since __unix__ covers Mac OSX, Linux and the BSDs
+#if defined(__unix__)
 	idSoundSystemLocal::s_useOpenAL.SetBool( true );
 #endif
 

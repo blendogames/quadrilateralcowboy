@@ -125,10 +125,10 @@ void idSysLocal::DLL_Unload( void* dllHandle ) {
 void idSysLocal::DLL_GetFileName( const char *baseName, char *dllName, int maxLength ) {
 #ifdef _WIN32
 	idStr::snPrintf( dllName, maxLength, "%s" CPUSTRING ".dll", baseName );
-#elif defined( __linux__ )
-	idStr::snPrintf( dllName, maxLength, "%s" CPUSTRING ".so", baseName );
 #elif defined( MACOS_X )
 	idStr::snPrintf( dllName, maxLength, "%s" ".dylib", baseName );
+#elif defined( __unix__ )
+	idStr::snPrintf( dllName, maxLength, "%s" CPUSTRING ".so", baseName );
 #else
 #error OS define is required
 #endif

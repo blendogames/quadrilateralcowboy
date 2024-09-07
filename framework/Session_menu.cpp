@@ -474,7 +474,7 @@ void idSessionLocal::SetMainMenuGuiVars( void ) {
 	//bc
 	//guiMsg->SetStateString( "visible_hasxp", fileSystem->HasD3XP() ? "1" : "0" );
 
-#if defined( __linux__ )
+#if defined( __unix__ )
 	guiMainMenu->SetStateString( "driver_prompt", "1" );
 #else
 	guiMainMenu->SetStateString( "driver_prompt", "0" );
@@ -1358,7 +1358,7 @@ void idSessionLocal::HandleMainMenuCommands( const char *menuCommand ) {
 						break;
 					}
 				} else {
-#ifndef __linux__
+#ifndef __unix__
 					// also turn off OpenAL so we fully go back to legacy mixer
 					cvarSystem->SetCVarBool( "s_useOpenAL", false );
 #endif
