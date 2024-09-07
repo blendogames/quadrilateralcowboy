@@ -103,11 +103,12 @@ If you have questions concerning this license or the applicable additional terms
 #include <typeinfo>
 #include <errno.h>
 #include <math.h>
-#ifdef __linux__
-#include <unistd.h>
-#elif defined __APPLE__
+#if defined __APPLE__
 #include <algorithm>
 using std::min;
+// This covers Linux and the BSDs
+#elif defined __unix__
+#include <unistd.h>
 #endif
 
 //-----------------------------------------------------

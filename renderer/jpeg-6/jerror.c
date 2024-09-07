@@ -20,8 +20,8 @@
 #include "jversion.h"
 #include "jerror.h"
 
-extern	jpg_Error( const char *fmt, ... );
-extern	jpg_Printf( const char *fmt, ... );
+extern void jpg_Error( const char *fmt, ... );
+extern void jpg_Printf( const char *fmt, ... );
 
 #ifndef EXIT_FAILURE		/* define exit() codes if not provided */
 #define EXIT_FAILURE  1

@@ -133,7 +133,7 @@ If you have questions concerning this license or the applicable additional terms
 
 
 // Linux
-#ifdef __linux__
+#ifdef __unix__
 
 #ifdef __i386__
 	#define	BUILD_STRING				"linux-x86"

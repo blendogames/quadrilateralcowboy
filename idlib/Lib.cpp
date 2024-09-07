@@ -29,7 +29,7 @@ If you have questions concerning this license or the applicable additional terms
 #include "precompiled.h"
 #pragma hdrstop
 
-#if defined( MACOS_X )
+#if defined(__unix__)
 #include <signal.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -152,7 +152,7 @@ dword PackColor( const idVec4 &color ) {
 	dz = ColorFloatToByte( color.z );
 	dw = ColorFloatToByte( color.w );
 
-#if defined(_WIN32) || defined(__linux__) || (defined(MACOS_X) && !defined(__ppc__))
+#if defined(_WIN32) || defined(__unix__) || (defined(MACOS_X) && !defined(__ppc__))
 	return ( dx << 0 ) | ( dy << 8 ) | ( dz << 16 ) | ( dw << 24 );
 #elif (defined(MACOS_X) && defined(__ppc__))
 	return ( dx << 24 ) | ( dy << 16 ) | ( dz << 8 ) | ( dw << 0 );
@@ -167,7 +167,7 @@ UnpackColor
 ================
 */
 void UnpackColor( const dword color, idVec4 &unpackedColor ) {
-#if defined(_WIN32) || defined(__linux__) || (defined(MACOS_X) && !defined(__ppc__))
+#if defined(_WIN32) || defined(__unix__) || (defined(MACOS_X) && !defined(__ppc__))
 	unpackedColor.Set( ( ( color >> 0 ) & 255 ) * ( 1.0f / 255.0f ),
 						( ( color >> 8 ) & 255 ) * ( 1.0f / 255.0f ), 
 						( ( color >> 16 ) & 255 ) * ( 1.0f / 255.0f ),
@@ -194,7 +194,7 @@ dword PackColor( const idVec3 &color ) {
 	dy = ColorFloatToByte( color.y );
 	dz = ColorFloatToByte( color.z );
 
-#if defined(_WIN32) || defined(__linux__) || (defined(MACOS_X) && !defined(__ppc__))
+#if defined(_WIN32) || defined(__unix__) || (defined(MACOS_X) && !defined(__ppc__))
 	return ( dx << 0 ) | ( dy << 8 ) | ( dz << 16 );
 #elif (defined(MACOS_X) && defined(__ppc__))
 	return ( dy << 16 ) | ( dz << 8 ) | ( dx << 0 );
@@ -209,7 +209,7 @@ UnpackColor
 ================
 */
 void UnpackColor( const dword color, idVec3 &unpackedColor ) {
-#if defined(_WIN32) || defined(__linux__) || (defined(MACOS_X) && !defined(__ppc__))
+#if defined(_WIN32) || defined(__unix__) || (defined(MACOS_X) && !defined(__ppc__))
 	unpackedColor.Set( ( ( color >> 0 ) & 255 ) * ( 1.0f / 255.0f ),
 						( ( color >> 8 ) & 255 ) * ( 1.0f / 255.0f ), 
 						( ( color >> 16 ) & 255 ) * ( 1.0f / 255.0f ) );
@@ -581,7 +581,7 @@ void AssertFailed( const char *file, int line, const char *expression ) {
 #else
 	__asm int 0x03
 #endif
-#elif defined( __linux__ )
+#elif defined( __unix__ )
 #ifdef __i386__
 	__asm__ __volatile__ ("int $0x03");
 #else

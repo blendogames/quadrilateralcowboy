@@ -1871,7 +1871,7 @@ static void APIENTRY logViewport(GLint x, GLint y, GLsizei width, GLsizei height
 }
 
 
-#ifdef __linux__
+#ifdef __unix__
 
 static XVisualInfo * APIENTRY logChooseVisual(Display *dpy, int screen, int *attribList) {
 // unknown type: "Display *" name: "dpy"
