@@ -36,8 +36,6 @@ ENDIF()
 
 # RPATH
 IF(APPLE)
-	SET(CMAKE_OSX_SYSROOT /Library/Developer/CommandLineTools/SDKs/MacOSX10.8.sdk)
-	SET(CMAKE_OSX_DEPLOYMENT_TARGET 10.8)
 	SET(BIN_LIBROOT "osx")
 	SET(BIN_RPATH "@executable_path/osx")
 	ADD_DEFINITIONS(-DMACOS_X) # WTF? -flibit
