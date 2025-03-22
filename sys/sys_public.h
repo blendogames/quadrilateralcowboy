@@ -100,6 +100,9 @@ If you have questions concerning this license or the applicable additional terms
 #elif defined(__x86_64__)
 	#define	CPUSTRING					"x86_64"
 	#define CPU_EASYARGS				0
+#elif defined(__aarch64__)
+	#define	CPUSTRING					"aarch64"
+	#define CPU_EASYARGS				0
 #else
 #error Unrecognized CPU arch!
 #endif
