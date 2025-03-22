@@ -681,7 +681,7 @@ double Sys_ClockTicksPerSecond(void) {
     mach_port_t masterPort;
 	CFMutableDictionaryRef matchDict = nil;
 	io_iterator_t itThis;
-	io_service_t service = nil;
+	io_service_t service = 0;
 	
     if (IOMasterPort(MACH_PORT_NULL, &masterPort))
 		goto bail;
@@ -693,7 +693,7 @@ double Sys_ClockTicksPerSecond(void) {
 	service = IOIteratorNext(itThis);
     while(service)
     {
-		io_service_t ioCpu = NULL;
+		io_service_t ioCpu = 0;
 		if (IORegistryEntryGetChildEntry(service, kIODeviceTreePlane, &ioCpu))
 			goto bail;
 		
