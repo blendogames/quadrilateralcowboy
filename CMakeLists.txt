@@ -8,25 +8,30 @@ PROJECT(QuadrilateralCowboy)
 OPTION(STEAM "Enable Steamworks" OFF)
 
 # Compiler Flags
-ADD_COMPILE_OPTIONS(
-	-pipe
-	-Wno-unknown-pragmas
-	-Wno-write-strings
-	-fmessage-length=0
-	-fpermissive
-	-fvisibility=hidden
-	-fno-strict-aliasing
-)
+IF(NOT WIN32)
+	ADD_COMPILE_OPTIONS(
+		-pipe
+		-Wno-unknown-pragmas
+		-Wno-write-strings
+		-fmessage-length=0
+		-fpermissive
+		-fvisibility=hidden
+		-fno-strict-aliasing
+	)
+ENDIF()
 ADD_DEFINITIONS(-D_D3XP -DCTF -DID_ENABLE_CURL=0 -DUSE_SDL -DXTHREADS)
 IF(CMAKE_BUILD_TYPE STREQUAL "Debug")
 	ADD_DEFINITIONS(-D_DEBUG -DID_MCHECK)
 ELSEIF(CMAKE_BUILD_TYPE STREQUAL "Release")
-	ADD_COMPILE_OPTIONS(
-		-Winline
-		-ffast-math
-		-fno-unsafe-math-optimizations
-		-fomit-frame-pointer
-	)
+	ADD_DEFINITIONS(-DNDEBUG)
+	IF(NOT WIN32)
+		ADD_COMPILE_OPTIONS(
+			-Winline
+			-ffast-math
+			-fno-unsafe-math-optimizations
+			-fomit-frame-pointer
+		)
+	ENDIF()
 ENDIF()
 IF(STEAM)
 	ADD_DEFINITIONS(-DSTEAM)
@@ -35,18 +40,20 @@ IF(STEAM)
 ENDIF()
 
 # RPATH
-IF(APPLE)
-	SET(BIN_LIBROOT "osx")
-	SET(BIN_RPATH "@executable_path/osx")
-	ADD_DEFINITIONS(-DMACOS_X) # WTF? -flibit
-ELSE()
-	SET(BIN_LIBROOT "lib64")
-	SET(BIN_RPATH "\$ORIGIN/lib64")
+IF(NOT WIN32)
+	IF(APPLE)
+		SET(BIN_LIBROOT "osx")
+		SET(BIN_RPATH "@executable_path/osx")
+		ADD_DEFINITIONS(-DMACOS_X) # WTF? -flibit
+	ELSE()
+		SET(BIN_LIBROOT "lib64")
+		SET(BIN_RPATH "\$ORIGIN/lib64")
+	ENDIF()
+	SET(CMAKE_SKIP_BUILD_RPATH TRUE)
+	SET(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
+	SET(CMAKE_INSTALL_RPATH ${BIN_RPATH})
+	SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
 ENDIF()
-SET(CMAKE_SKIP_BUILD_RPATH TRUE)
-SET(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
-SET(CMAKE_INSTALL_RPATH ${BIN_RPATH})
-SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)
 
 # Include Directories
 INCLUDE_DIRECTORIES(. sound/OggVorbis/vorbissrc/)
@@ -302,6 +309,12 @@ SET(QC_SRC
 	idlib/math/Rotation.cpp
 	idlib/math/Simd.cpp
 	idlib/math/Simd_Generic.cpp
+	idlib/math/Simd_3DNow.cpp
+	idlib/math/Simd_AltiVec.cpp
+	idlib/math/Simd_MMX.cpp
+	idlib/math/Simd_SSE.cpp
+	idlib/math/Simd_SSE2.cpp
+	idlib/math/Simd_SSE3.cpp
 	idlib/math/Vector.cpp
 	idlib/BitMsg.cpp
 	idlib/LangDict.cpp
@@ -429,39 +442,61 @@ SET(QC_SRC
 	sys/glimp.cpp
 	sys/events.cpp
 	sys/sys_local.cpp
-	sys/stub/util_stub.cpp
-	sys/posix/posix_net.cpp
-	sys/posix/posix_main.cpp
-	sys/posix/posix_input.cpp
-	sys/posix/posix_signal.cpp
-	sys/posix/posix_threads.cpp
-	sys/linux/stack.cpp
 )
-IF(APPLE)
+IF(WIN32)
 	SET(QC_SRC
 		${QC_SRC}
-		sys/osx/DOOMController.mm
-		sys/osx/macosx_event.mm
-		sys/osx/macosx_glimp.mm
-		sys/osx/macosx_guids.cpp
-		sys/osx/macosx_misc.mm
-		sys/osx/macosx_sound.cpp
-		sys/osx/PickMonitor.cpp
-		sys/osx/PreferencesDialog.cpp
+		sys/win32/win_cpu.cpp
+		sys/win32/win_glimp.cpp
+		sys/win32/win_input.cpp
+		sys/win32/win_main.cpp
+		sys/win32/win_net.cpp
+		sys/win32/win_qgl.cpp
+		sys/win32/win_shared.cpp
+		sys/win32/win_snd.cpp
+		sys/win32/win_syscon.cpp
+		sys/win32/win_taskkeyhook.cpp
+		sys/win32/win_wndproc.cpp
 	)
 ELSE()
 	SET(QC_SRC
 		${QC_SRC}
-		idlib/bv/Frustum_gcc.cpp
-		sys/linux/sound_oal.cpp
-		sys/linux/input.cpp
-		sys/linux/glimp.cpp
-		sys/linux/glimp_dlopen.cpp
-		sys/linux/main.cpp
+		sys/stub/util_stub.cpp
+		sys/posix/posix_net.cpp
+		sys/posix/posix_main.cpp
+		sys/posix/posix_input.cpp
+		sys/posix/posix_signal.cpp
+		sys/posix/posix_threads.cpp
+		sys/linux/stack.cpp
 	)
+
+	IF(APPLE)
+		SET(QC_SRC
+			${QC_SRC}
+			sys/osx/DOOMController.mm
+			sys/osx/macosx_event.mm
+			sys/osx/macosx_glimp.mm
+			sys/osx/macosx_guids.cpp
+			sys/osx/macosx_misc.mm
+			sys/osx/macosx_sound.cpp
+			sys/osx/PickMonitor.cpp
+			sys/osx/PreferencesDialog.cpp
+		)
+	ELSE()
+		SET(QC_SRC
+			${QC_SRC}
+			idlib/bv/Frustum_gcc.cpp
+			sys/linux/sound_oal.cpp
+			sys/linux/input.cpp
+			sys/linux/glimp.cpp
+			sys/linux/glimp_dlopen.cpp
+			sys/linux/main.cpp
+		)
+	ENDIF()
 ENDIF()
 
 # Executable information
+SET(CMAKE_WIN32_EXECUTABLE ON)
 ADD_EXECUTABLE(qc ${QC_SRC})
 
 set_target_properties(qc PROPERTIES
@@ -469,6 +504,10 @@ set_target_properties(qc PROPERTIES
     CXX_STANDARD_REQUIRED ON)
 
 # SDL2 Dependency (Detection pulled from FAudio)
+if(WIN32)
+	set(SDL2_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/sdl2/include)
+	set(SDL2_LIBRARIES ${CMAKE_SOURCE_DIR}/sdl2/lib/win32/SDL2.lib)
+endif()
 if (DEFINED SDL2_INCLUDE_DIRS AND DEFINED SDL2_LIBRARIES)
 	message(STATUS "using pre-defined SDL2 variables SDL2_INCLUDE_DIRS and SDL2_LIBRARIES")
 	target_include_directories(qc PUBLIC "$<BUILD_INTERFACE:${SDL2_INCLUDE_DIRS}>")
@@ -497,10 +536,26 @@ IF(APPLE)
 	FIND_LIBRARY(IOKIT NAMES IOKit)
 	FIND_LIBRARY(COREAUDIO NAMES CoreAudio)
 	TARGET_LINK_LIBRARIES(qc PUBLIC objc ${OPENGL} ${OPENAL} ${COCOA} ${IOKIT} ${COREAUDIO})
-ELSE()
+ELSEIF(NOT WIN32)
 	TARGET_LINK_LIBRARIES(qc PUBLIC openal)
 ENDIF()
-TARGET_LINK_LIBRARIES(qc PUBLIC dl pthread)
+IF(WIN32)
+	TARGET_LINK_LIBRARIES(qc PUBLIC
+		dbghelp.lib
+		dinput8.lib
+		dsound.lib
+		glu32.lib
+		iphlpapi.lib
+		odbc32.lib
+		odbccp32.lib
+		opengl32.lib
+		winmm.lib
+		wsock32.lib
+		${CMAKE_SOURCE_DIR}/openal/lib/eaxguid.lib
+	)
+ELSE()
+	TARGET_LINK_LIBRARIES(qc PUBLIC dl pthread)
+ENDIF()
 IF(STEAM)
 	TARGET_LINK_LIBRARIES(qc PUBLIC steam_api)
 ENDIF()
