@@ -29,7 +29,11 @@ If you have questions concerning this license or the applicable additional terms
 #pragma hdrstop
 
 // DirectX SDK
+#if 0 // flibit removed this, CI doesn't have this
 #include <DxErr.h>
+#else
+#define DXTRACE_ERR(str,hr) (hr)
+#endif
 
 #include <ks.h>
 #include <ksmedia.h>
