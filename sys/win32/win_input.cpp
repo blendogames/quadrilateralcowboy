@@ -26,6 +26,8 @@ If you have questions concerning this license or the applicable additional terms
 ===========================================================================
 */
 
+#define INITGUID // Needed for XAxis/YAxis/ZAxis
+
 #include "../../idlib/precompiled.h"
 #pragma hdrstop
 
