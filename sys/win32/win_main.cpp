@@ -35,7 +35,9 @@ If you have questions concerning this license or the applicable additional terms
 #include <direct.h>
 #include <io.h>
 #include <conio.h>
+#if 0 // flibit removed this include, VS2022 was _not_ happy about it
 #include <mapi.h>
+#endif
 #include <ShellAPI.h>
 
 #ifndef __MRC__
@@ -1259,6 +1261,7 @@ EmailCrashReport
 ====================
 */
 void EmailCrashReport( LPSTR messageText ) {
+#if 0 // QC disables the exception handler anyway -flibit
 	LPMAPISENDMAIL	MAPISendMail;
 	MapiMessage		message;
 	static int lastEmailTime = 0;
@@ -1299,6 +1302,7 @@ void EmailCrashReport( LPSTR messageText ) {
 		}
 		FreeLibrary( mapi );
 	}
+#endif
 }
 
 int Sys_FPU_PrintStateFlags( char *ptr, int ctrl, int stat, int tags, int inof, int inse, int opof, int opse );
