@@ -842,6 +842,7 @@ extern idCVar r_flareSize;				// scale the flare deforms from the material def
 
 extern idCVar r_gamma;					// changes gamma tables
 extern idCVar r_brightness;				// changes gamma tables
+extern idCVar r_gammaInShader;			// set gamma+brightness in shader instead of modifying system gamma tables
 
 extern idCVar r_renderer;				// arb, nv10, nv20, r200, gl2, etc
 
@@ -1102,6 +1103,8 @@ void		GLimp_SetGamma( unsigned short red[256],
 // These are now taken as 16 bit values, so we can take full advantage
 // of dacs with >8 bits of precision
 
+void		GLimp_ResetGamma();
+// resets the gamma to what it was at startup
 
 bool		GLimp_SpawnRenderThread( void (*function)( void ) );
 // Returns false if the system only has a single processor
