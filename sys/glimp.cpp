@@ -179,8 +179,8 @@ bool GLimp_Init(glimpParms_t parms) {
 #endif
 
 		window = SDL_CreateWindow(GAME_NAME,
-									SDL_WINDOWPOS_UNDEFINED,
-									SDL_WINDOWPOS_UNDEFINED,
+									SDL_WINDOWPOS_CENTERED,
+									SDL_WINDOWPOS_CENTERED,
 									parms.width, parms.height, flags);
 
 		// set the icon for linux.
