@@ -31,6 +31,23 @@ jobs:
     - name: Build (Release)
       run: |
         ninja -C release
+        strip -S release/qc
+        mv release/qc qc.bin.x86_64
+
+    - name: CMake configure (Release 32-bit)
+      run: CC="cc -m32" CXX="c++ -m32" cmake -B release32 -G Ninja . -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build (Release 32-bit)
+      run: |
+        ninja -C release32
+        strip -S release32/qc
+        mv release32/qc qc.bin.x86
+
+    - name: Archive build result
+      uses: actions/upload-artifact@v4
+      with:
+        name: qc-linux
+        path: qc.bin.*
 
   macos:
     name: macOS
@@ -53,7 +70,16 @@ jobs:
       run: cmake -B release -G Ninja . -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="x86_64" -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0
 
     - name: Build (Release)
-      run: ninja -C release
+      run: |
+        ninja -C release
+        strip -S release/qc
+        mv release/qc "Quadrilateral Cowboy"
+
+    - name: Archive build result
+      uses: actions/upload-artifact@v4
+      with:
+        name: qc-osx
+        path: "Quadrilateral Cowboy"
 
   windows:
     name: Win32
