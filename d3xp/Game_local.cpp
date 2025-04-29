@@ -178,6 +178,7 @@ void TestGameAPI( void ) {
 	gameImport_t testImport;
 	gameExport_t testExport;
 
+	testImport.version				= GAME_API_VERSION;
 	testImport.sys						= ::sys;
 	testImport.common					= ::common;
 	testImport.cmdSystem				= ::cmdSystem;
