@@ -313,7 +313,7 @@ idRenderSystemLocal::idRenderSystemLocal( void ) {
 	viewportOffset[1] = 0;
 	tiledViewport[0] = 0;
 	tiledViewport[1] = 0;
-	backEndRenderer = NULL;
+	backEndRenderer = BE_BAD;
 	backEndRendererHasVertexPrograms = false;
 	backEndRendererMaxLight = 0.0f;
 	memset( &ambientLightVector, 0, sizeof(ambientLightVector) );

@@ -381,6 +381,8 @@ void idSoundEmitterLocal::Clear( void ) {
 	maxDistance = 10.0f;						// meters
 	spatializedOrigin.Zero();
 
+	memset( &origin, 0, sizeof( origin ) );
+	listenerId = 0;
 	memset( &parms, 0, sizeof( parms ) );
 }
 
