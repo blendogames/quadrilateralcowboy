@@ -201,9 +201,15 @@ bool GLimp_Init(glimpParms_t parms) {
 
 #ifdef __WINDOWS__ // HACK: windows fullscreeen doesn't get focus properly, this is a work around.
 		// Switch to fullscreen now if needed, this works around a weird focus bug in SDL2
-		// TODO: add SDL_WINDOW_FULLSCREEN_DESKTOP option.
 		if (parms.fullScreen)
-			SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+		{
+			SDL_SetWindowFullscreen(
+				window,
+				parms.fullScreenDesktop ?
+					SDL_WINDOW_FULLSCREEN_DESKTOP :
+					SDL_WINDOW_FULLSCREEN
+			);
+		}
 
 		// flush out the event queue so we set the hWnd etc. for id
 		win32.hWnd = NULL;
