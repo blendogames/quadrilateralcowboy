@@ -960,8 +960,7 @@ void R_InitOpenGL( void ) {
 	R_ARB2_Init();
 
 	cmdSystem->AddCommand( "reloadARBprograms", R_ReloadARBPrograms_f, CMD_FL_RENDERER, "reloads ARB programs" );
-	// flibit removed this, r_gammaInShader handles this now
-	// R_ReloadARBPrograms_f( idCmdArgs() );
+	R_ReloadARBPrograms_f( idCmdArgs() );
 
 	// allocate the vertex array range or vertex objects
 	vertexCache.Init();

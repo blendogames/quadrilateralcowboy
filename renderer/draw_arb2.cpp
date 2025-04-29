@@ -602,7 +602,14 @@ R_ReloadARBPrograms_f
 void R_ReloadARBPrograms_f( const idCmdArgs &args ) {
 	int		i;
 
+	r_gammaInShader.ClearModified();
+
 	common->Printf( "----- R_ReloadARBPrograms -----\n" );
+	if ( r_gammaInShader.GetBool() ) {
+		common->Printf( "Will apply r_gamma and r_brightness in shaders\n" );
+	} else {
+		common->Printf( "Will apply r_gamma and r_brightness in hardware (possibly on all screens)\n" );
+	}
 	for ( i = 0 ; progs[i].name[0] ; i++ ) {
 		R_LoadARBProgram( i );
 	}
