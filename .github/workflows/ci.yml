@@ -43,17 +43,14 @@ jobs:
     - name: Generate glimp files
       run: ./flibitGLIMP.sh
 
-    - name: Install dependencies
-      run: brew install sdl2
-
     - name: CMake configure (Debug)
-      run: cmake -B debug -G Ninja . -DCMAKE_BUILD_TYPE=Debug -DCMAKE_OSX_ARCHITECTURES="arm64" -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0
+      run: cmake -B debug -G Ninja . -DCMAKE_BUILD_TYPE=Debug -DCMAKE_OSX_ARCHITECTURES="x86_64" -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0
 
     - name: Build (Debug)
       run: ninja -C debug
 
     - name: CMake configure (Release)
-      run: cmake -B release -G Ninja . -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="arm64" -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0
+      run: cmake -B release -G Ninja . -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="x86_64" -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0
 
     - name: Build (Release)
       run: ninja -C release
