@@ -101,3 +101,9 @@ jobs:
     - name: Build (Release)
       run: |
         cmake --build release --config Release
+
+    - name: Archive build result
+      uses: actions/upload-artifact@v4
+      with:
+        name: qc-win32
+        path: release/Release/qc.exe
