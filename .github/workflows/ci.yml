@@ -10,7 +10,7 @@ jobs:
     name: Steam Linux Runtime
     runs-on: ubuntu-latest
     container:
-      image: registry.gitlab.steamos.cloud/steamrt/sniper/sdk:beta
+      image: registry.gitlab.steamos.cloud/steamrt/sniper/sdk:latest
     steps:
     - uses: actions/checkout@v4
       with:
@@ -19,16 +19,10 @@ jobs:
     - name: Generate glimp files
       run: ./flibitGLIMP.sh
 
-    - name: CMake configure (Debug)
-      run: cmake -B debug -G Ninja . -DCMAKE_BUILD_TYPE=Debug
-
-    - name: Build (Debug)
-      run: ninja -C debug
-
-    - name: CMake configure (Release)
+    - name: CMake configure
       run: cmake -B release -G Ninja . -DCMAKE_BUILD_TYPE=Release
 
-    - name: Build (Release)
+    - name: Build
       run: |
         ninja -C release
         strip -S release/qc
@@ -49,6 +43,50 @@ jobs:
         name: qc-linux
         path: qc.bin.*
 
+  linux-steam:
+    name: Steam Linux Runtime (Steamworks)
+    runs-on: ubuntu-latest
+    container:
+      image: registry.gitlab.steamos.cloud/steamrt/sniper/sdk:latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+
+    - name: Download Steamworks SDK
+      run: |
+        git clone --depth 1 --branch 1.62 https://github.com/flibitijibibo/steamworks-sdk
+        mv steamworks-sdk/steam steam
+
+    - name: Generate glimp files
+      run: ./flibitGLIMP.sh
+
+    - name: CMake configure
+      run: cmake -B release -G Ninja . -DCMAKE_BUILD_TYPE=Release -DSTEAM=ON
+
+    - name: Build
+      run: |
+        cp steamworks-sdk/redistributable_bin/linux64/libsteam_api.so steam
+        ninja -C release
+        strip -S release/qc
+        mv release/qc qc.bin.x86_64
+
+    - name: CMake configure (Release 32-bit)
+      run: CC="cc -m32" CXX="c++ -m32" cmake -B release32 -G Ninja . -DCMAKE_BUILD_TYPE=Release -DSTEAM=ON
+
+    - name: Build (Release 32-bit)
+      run: |
+        cp steamworks-sdk/redistributable_bin/linux32/libsteam_api.so steam
+        ninja -C release32
+        strip -S release32/qc
+        mv release32/qc qc.bin.x86
+
+    - name: Archive build result
+      uses: actions/upload-artifact@v4
+      with:
+        name: qc-linux-steam
+        path: qc.bin.*
+
   macos:
     name: macOS
     runs-on: macos-latest
@@ -60,16 +98,10 @@ jobs:
     - name: Generate glimp files
       run: ./flibitGLIMP.sh
 
-    - name: CMake configure (Debug)
-      run: cmake -B debug -G Ninja . -DCMAKE_BUILD_TYPE=Debug -DCMAKE_OSX_ARCHITECTURES="x86_64" -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0
-
-    - name: Build (Debug)
-      run: ninja -C debug
-
-    - name: CMake configure (Release)
+    - name: CMake configure
       run: cmake -B release -G Ninja . -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="x86_64" -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0
 
-    - name: Build (Release)
+    - name: Build
       run: |
         ninja -C release
         strip -S release/qc
@@ -81,6 +113,38 @@ jobs:
         name: qc-osx
         path: "Quadrilateral Cowboy"
 
+  macos-steam:
+    name: macOS (Steamworks)
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+
+    - name: Download Steamworks SDK
+      run: |
+        git clone --depth 1 --branch 1.62 https://github.com/flibitijibibo/steamworks-sdk
+        mv steamworks-sdk/steam steam
+
+    - name: Generate glimp files
+      run: ./flibitGLIMP.sh
+
+    - name: CMake configure
+      run: cmake -B release -G Ninja . -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="x86_64" -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0 -DSTEAM=ON
+
+    - name: Build
+      run: |
+        cp steamworks-sdk/redistributable_bin/osx/libsteam_api.dylib steam
+        ninja -C release
+        strip -S release/qc
+        mv release/qc "Quadrilateral Cowboy"
+
+    - name: Archive build result
+      uses: actions/upload-artifact@v4
+      with:
+        name: qc-osx-steam
+        path: "Quadrilateral Cowboy"
+
   windows:
     name: Win32
     runs-on: windows-latest
@@ -89,16 +153,10 @@ jobs:
       with:
         submodules: true
 
-    - name: CMake configure (Debug)
-      run: cmake -B debug -G "Visual Studio 17 2022" . -A Win32 -DCMAKE_BUILD_TYPE=Debug
-
-    - name: Build (Debug)
-      run: cmake --build debug --config Debug
-
-    - name: CMake configure (Release)
+    - name: CMake configure
       run: cmake -B release -G "Visual Studio 17 2022" . -A Win32 -DCMAKE_BUILD_TYPE=Release
 
-    - name: Build (Release)
+    - name: Build
       run: |
         cmake --build release --config Release
 
@@ -106,4 +164,32 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: qc-win32
+        path: release/Release/qc.exe
+
+  windows-steam:
+    name: Win32 (Steamworks)
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+
+    - name: Download Steamworks SDK
+      run: |
+        git clone --depth 1 --branch 1.62 https://github.com/flibitijibibo/steamworks-sdk
+        move steamworks-sdk/steam steam
+
+    - name: CMake configure
+      run: cmake -B release -G "Visual Studio 17 2022" . -A Win32 -DCMAKE_BUILD_TYPE=Release -DSTEAM=ON
+
+    - name: Build
+      run: |
+        cp steamworks-sdk/redistributable_bin/steam_api.dll steam/
+        cp steamworks-sdk/redistributable_bin/steam_api.lib steam/
+        cmake --build release --config Release
+
+    - name: Archive build result
+      uses: actions/upload-artifact@v4
+      with:
+        name: qc-win32-steam
         path: release/Release/qc.exe
