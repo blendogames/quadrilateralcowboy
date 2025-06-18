@@ -2,7 +2,6 @@
 #pragma hdrstop
 
 #ifdef STEAM
-#include "steam_api.h"
 #include "steamremote.h"
 
 #include "Game_local.h"

@@ -123,6 +123,10 @@ using std::min;
 #endif
 #endif
 
+#ifdef STEAM
+#include "steam_api.h"
+#endif
+
 // non-portable system services
 #include "../sys/sys_public.h"
 

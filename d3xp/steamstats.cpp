@@ -2,8 +2,6 @@
 #pragma hdrstop
 
 #ifdef STEAM
-#include "steam_api.h"
-#include "isteamuserstats.h"
 #include "steamstats.h"
 
 #include "Game_local.h"

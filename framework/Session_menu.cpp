@@ -32,13 +32,6 @@ If you have questions concerning this license or the applicable additional terms
 #include "Session_local.h"
 //#include <time.h> //bc
 
-
-
-#ifdef STEAM
-#include "steam_api.h"
-#endif
-
-
 idCVar	idSessionLocal::gui_configServerRate( "gui_configServerRate", "0", CVAR_GUI | CVAR_ARCHIVE | CVAR_ROM | CVAR_INTEGER, "" );
 
 // implements the setup for, and commands from, the main menu
