@@ -50,10 +50,6 @@ If you have questions concerning this license or the applicable additional terms
 #include "rc/CreateResourceIDs.h"
 #include "../../renderer/tr_local.h"
 
-#ifdef STEAM
-#include "steam_api.h"
-#endif
-
 idCVar Win32Vars_t::sys_arch( "sys_arch", "", CVAR_SYSTEM | CVAR_INIT, "" );
 idCVar Win32Vars_t::sys_cpustring( "sys_cpustring", "detect", CVAR_SYSTEM | CVAR_INIT, "" );
 idCVar Win32Vars_t::in_mouse( "in_mouse", "1", CVAR_SYSTEM | CVAR_BOOL, "enable mouse input" );

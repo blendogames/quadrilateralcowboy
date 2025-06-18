@@ -32,7 +32,6 @@ If you have questions concerning this license or the applicable additional terms
 #include "../Game_local.h"
 
 #ifdef STEAM
-#include "steam_api.h"
 #include "../steamstats.h"
 #include "../steamleaderboard.h"
 #endif

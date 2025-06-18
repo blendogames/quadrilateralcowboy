@@ -30,7 +30,6 @@ If you have questions concerning this license or the applicable additional terms
 #pragma hdrstop
 
 #ifdef STEAM
-#include "steam_api.h"
 #include "steamstats.h"
 #include "steamremote.h"
 #include "steamleaderboard.h"

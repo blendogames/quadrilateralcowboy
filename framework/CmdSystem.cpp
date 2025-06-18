@@ -29,12 +29,6 @@ If you have questions concerning this license or the applicable additional terms
 #include "../idlib/precompiled.h"
 #pragma hdrstop
 
-
-#ifdef STEAM
-#include "steam_api.h"
-#endif
-
-
 /*
 ===============================================================================
 
