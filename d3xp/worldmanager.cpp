@@ -739,6 +739,9 @@ void idWorldManager::UpdateRecord( void )
 	lastAngle = gameLocal.GetLocalPlayer()->viewAngles.yaw;	
 	
 	record_t newEvent;
+	newEvent.recordtype = 0;
+	newEvent.done = false;
+
 	newEvent.timestamp = gameLocal.time - recordStarttime;
 	newEvent.position = currentPosition;
 	newEvent.yaw = currentAngle;
