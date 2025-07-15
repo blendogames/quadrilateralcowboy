@@ -55,7 +55,7 @@ jobs:
 
     - name: Download Steamworks SDK
       run: |
-        git clone --depth 1 --branch 1.60 https://github.com/flibitijibibo/steamworks-sdk
+        git clone --depth 1 --branch 1.37 https://github.com/flibitijibibo/steamworks-sdk
         mv steamworks-sdk/steam steam
 
     - name: Generate glimp files
@@ -123,7 +123,7 @@ jobs:
 
     - name: Download Steamworks SDK
       run: |
-        git clone --depth 1 --branch 1.60 https://github.com/flibitijibibo/steamworks-sdk
+        git clone --depth 1 --branch 1.37 https://github.com/flibitijibibo/steamworks-sdk
         mv steamworks-sdk/steam steam
 
     - name: Generate glimp files
@@ -176,7 +176,7 @@ jobs:
 
     - name: Download Steamworks SDK
       run: |
-        git clone --depth 1 --branch 1.60 https://github.com/flibitijibibo/steamworks-sdk
+        git clone --depth 1 --branch 1.37 https://github.com/flibitijibibo/steamworks-sdk
         move steamworks-sdk/steam steam
 
     - name: CMake configure
