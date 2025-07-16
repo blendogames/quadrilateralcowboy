@@ -134,7 +134,7 @@ jobs:
 
     - name: Build
       run: |
-        cp steamworks-sdk/redistributable_bin/osx/libsteam_api.dylib steam
+        cp steamworks-sdk/redistributable_bin/osx32/libsteam_api.dylib steam
         ninja -C release
         strip -S release/qc
         mv release/qc "Quadrilateral Cowboy"
