@@ -8435,6 +8435,13 @@ void idPlayer::RevivePlayer( void )
 	this->health = 100;
 	physicsObj.SetMovementType( PM_NORMAL );
 	AI_DEAD = false;
+
+    //BC 1-30-2026: playerdeath respawn animation bugfix
+    //Force the player model to return to idle animation cycle.
+    //If you don't do this, the player gets stuck in unexpected idle anims.
+    Event_IdleAnim(ANIMCHANNEL_TORSO, "idle");
+    Event_IdleAnim(ANIMCHANNEL_LEGS, "idle");
+
 	SetAnimState( ANIMCHANNEL_LEGS, "Legs_Idle", 4 );
 	forceRespawn = false;	
 

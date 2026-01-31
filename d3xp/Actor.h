@@ -213,6 +213,10 @@ public:
 	idEntity*				GetHeadEntity() { return head.GetEntity(); };
 #endif
 
+    //BC 1-30-2026: playerdeath respawn animation bugfix
+    //Moving this to public (was private)
+    void					Event_IdleAnim(int channel, const char *name);
+
 protected:
 	friend class			idAnimState;
 
@@ -302,7 +306,7 @@ private:
 	void					Event_StopAnim( int channel, int frames );
 	void					Event_PlayAnim( int channel, const char *name );
 	void					Event_PlayCycle( int channel, const char *name );
-	void					Event_IdleAnim( int channel, const char *name );
+
 	void					Event_SetSyncedAnimWeight( int channel, int anim, float weight );
 	void					Event_OverrideAnim( int channel );
 	void					Event_EnableAnim( int channel, int blendFrames );
