@@ -85,6 +85,9 @@ extern idCVar	g_showEnemies;
 //bc
 extern idCVar	g_showModelNames;
 
+//BC 1-30-2026: anim debug
+extern idCVar   ai_showPlayerState;
+
 extern idCVar	g_frametime;
 extern idCVar	g_timeentities;
 

@@ -2067,6 +2067,33 @@ void idActor::UpdateAnimState( void ) {
 	headAnim.UpdateState();
 	torsoAnim.UpdateState();
 	legsAnim.UpdateState();
+
+    //BC 1-30-2026: anim debug.
+    if (ai_showPlayerState.GetBool() && this->IsType(idPlayer::Type))
+    {
+        idVec3 drawpos = GetPhysics()->GetOrigin() + idVec3(0,0,80);
+
+        if (ai_showPlayerState.GetInteger() == 1)
+        {
+            gameRenderWorld->DrawText(torsoAnim.state,
+                drawpos,
+                0.2f, colorWhite, viewAxis, 100);
+
+            gameRenderWorld->DrawText(legsAnim.state,
+                drawpos + idVec3(0, 0, -8),
+                0.2f, colorWhite, viewAxis, 100);
+        }
+        else
+        {
+            gameRenderWorld->DrawText(idStr(torsoAnim.state) + " [" + idStr(animator.CurrentAnim(ANIMCHANNEL_TORSO)->AnimFullName()) + "]",
+                drawpos,
+                0.2f, colorWhite, viewAxis, 100);
+
+            gameRenderWorld->DrawText(idStr(legsAnim.state) + " [" + idStr(animator.CurrentAnim(ANIMCHANNEL_TORSO)->AnimFullName()) + "]",
+                drawpos + idVec3(0, 0, -8),
+                0.2f, colorWhite, viewAxis, 100);
+        }
+    }
 }
 
 /*
