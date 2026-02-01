@@ -478,3 +478,6 @@ idCVar net_serverDlTable(			"net_serverDlTable",		"",				CVAR_GAME | CVAR_ARCHIV
 
 //BC 1-30-2026: debug for player states
 idCVar ai_showPlayerState("ai_showPlayerState", "0", CVAR_GAME | CVAR_INTEGER, "Draws the Player state changes.");
+
+//BC 1-31-2026: debug for model animations
+idCVar g_showModelAnims("g_showModelAnims", "0", CVAR_GAME | CVAR_INTEGER, "Display animation name of model you're looking at.");

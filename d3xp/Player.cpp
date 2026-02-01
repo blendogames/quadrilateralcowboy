@@ -10201,6 +10201,41 @@ void idPlayer::Think( void ) {
 			}
 		}
 	}
+
+
+    //BC 1-31-2026: debug for model animations
+    if (g_showModelAnims.GetBool())
+    {
+        idEntity *ent;
+        idMat3		axis = viewAngles.ToMat3();
+        idVec3		up = axis[2] * 5.0f;
+        idBounds	viewTextBounds(GetPhysics()->GetOrigin());
+        idBounds	viewBounds(GetPhysics()->GetOrigin());
+
+        float maxDistance = 128.0f;
+
+        viewTextBounds.ExpandSelf(maxDistance);
+        viewBounds.ExpandSelf(maxDistance);
+        for (ent = gameLocal.spawnedEntities.Next(); ent != NULL; ent = ent->spawnNode.Next())
+        {
+            if (!viewBounds.IntersectsBounds(ent->GetPhysics()->GetAbsBounds()))
+                continue;
+
+            if (ent->entityNumber <= 0) //skip player.
+                continue;
+
+            if (ent->GetAnimator() != NULL)
+            {
+                gameRenderWorld->DrawText(ent->spawnArgs.GetString("name"),
+                    ent->GetPhysics()->GetOrigin() + idVec3(0,0,6), 0.1f, idVec4(0, 1, 0, 1), viewAxis, 1);
+
+                gameRenderWorld->DrawText(ent->GetAnimator()->CurrentAnim(ANIMCHANNEL_ALL)->AnimFullName(),
+                    ent->GetPhysics()->GetOrigin() , 0.15f, idVec4(1, 1, 1, 1), viewAxis, 1);                
+
+                gameRenderWorld->DebugBounds(idVec4(0, 1, 0, 1), ent->GetPhysics()->GetAbsBounds(), vec3_zero, 1);
+            }
+        }
+    }
 }
 
 void idPlayer::DebugMessage( const char *text )
