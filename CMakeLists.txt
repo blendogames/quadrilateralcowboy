@@ -1,7 +1,7 @@
 # CMake File for Quadrilateral Cowboy (Because scons and Xcode are butt)
 # Written by Ethan "flibitijibibo" Lee
 
-CMAKE_MINIMUM_REQUIRED(VERSION 3.1)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
 PROJECT(QuadrilateralCowboy)
 
 # CMake Options
