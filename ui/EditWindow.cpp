@@ -597,7 +597,7 @@ const char *idEditWindow::HandleEvent(const sysEvent_t *event, bool *updateVisua
 				text = cmdHistory[cmdIndex].c_str();
 				cursorPos = cmdHistory[cmdIndex].Length() ;
 
-				return cmd;				
+				return ret; // flibit changed this from cmd to ret, cmd could be "deckcommand" which is wrong
 			}
 		}
 
