@@ -8871,6 +8871,12 @@ void idPlayer::PerformImpulse( int impulse ) {
 			RevivePlayer();
 
 			UseFrob( this, "onSimManualReset");
+
+            //BC 2-11-2026: when resetting, drop anything being held.
+            pickerWeapon.Update(this, true, NULL, 0, false);
+            pickerState = 0;
+
+
 			break;
 		}
 
