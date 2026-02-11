@@ -330,6 +330,11 @@ void idLauncher::UpdateBeams( void )
 	{
 		idVec3 endPos = lastPos + (forwardbeam1 * horizontalDist) + (idVec3(0,0,-1) * verticalDist);
 
+        //BC 2-11-2026: possible crash fix for interacting with launcher remote while restarting the level.
+        if (beamStarts[i]->entityNumber >= MAX_GENTITIES - 1
+            || beamEnds[i]->entityNumber >= MAX_GENTITIES -1)
+            return;
+
 		beamStarts[i]->SetOrigin(lastPos);
 		beamEnds[i]->SetOrigin(endPos);
 
@@ -574,6 +579,13 @@ void idLauncher::MoveBone(const char *bonename, idVec3 direction)
 {
 	if (remoteEnt == NULL)
 		return;
+
+    //BC 2-11-2026: possible crash fix
+    if (remoteEnt->entityNumber >= MAX_GENTITIES - 1)
+        return;
+
+    if (remoteEnt->GetAnimator() == NULL)
+        return;
 
 	jointHandle_t jointHandle;
 	jointHandle = remoteEnt->GetAnimator()->GetJointHandle( bonename );
