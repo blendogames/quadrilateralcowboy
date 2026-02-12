@@ -8281,6 +8281,10 @@ bool idPlayer::UseFrob( idEntity *entity, const char *scriptname )
 		return false;
 	}
 
+    //BC 2-12-2026: fixed occasional crash with pressing ESC during moto spectre sequence
+    if (this == NULL)
+        return false;
+
 	if (this->viewlookActive)
 		return false;
 	
