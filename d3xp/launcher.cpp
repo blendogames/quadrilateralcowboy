@@ -607,7 +607,9 @@ void idLauncher::Think( void )
 {	
 	int i;
 
-
+	//TEMP
+	//common->Printf("is holding gatorEnt: %d    remoteEnt ent: %d\n", gameLocal.GetLocalPlayer()->Event_isHolding(gatorEnt), remoteEnt->entityNumber);
+	
 
 
 
@@ -662,40 +664,44 @@ void idLauncher::Think( void )
 			remoteRaiseLerp = RISETIME;
 		}
 
-		if (remoteEnt->IsBound())
+		//BC 5-15-2026 fix crash when you: place launcher, LMB launcher, stash launcher, place launcher, then LMB launcher
+		if (remoteEnt->entityNumber < 4095)
 		{
-			remoteEnt->Unbind();
+			if (remoteEnt->IsBound())
+			{
+				remoteEnt->Unbind();
+			}
+
+			//gameLocal.GetLocalPlayer()->viewAngles
+
+
+
+			idAngles remoteAng = gameLocal.GetLocalPlayer()->viewAngles;
+			remoteAng.yaw += 180;
+			remoteAng.pitch *= -1;
+			remoteAng.pitch += 3 * idMath::Sin(gameLocal.time * 0.0005f); //sway
+			remoteAng.yaw += 5 * idMath::Sin(gameLocal.time * 0.0003f);  //sway
+			remoteEnt->SetAngles(remoteAng);
+
+			idVec3	up;
+			remoteAng.ToVectors(NULL, NULL, &up);
+
+
+			idVec3 finalPos = gameLocal.GetLocalPlayer()->GetEyePosition() + (gameLocal.GetLocalPlayer()->viewAngles.ToForward() * 6) + (up * -3.8f);
+
+			if (remoteRaiseLerp < RISETIME)
+			{
+				//is raising.
+				float amt = remoteRaiseLerp / RISETIME;
+				finalPos.x = idMath::Lerp(baseGatorPos.x, finalPos.x, amt);
+				finalPos.y = idMath::Lerp(baseGatorPos.y, finalPos.y, amt);
+				finalPos.z = idMath::Lerp(baseGatorPos.z, finalPos.z, amt);
+			}
+
+
+			//remoteEnt->SetOrigin( gameLocal.GetLocalPlayer()->GetEyePosition() + (gameLocal.GetLocalPlayer()->viewAngles.ToForward() * 6) + (up * -3.8f     ));
+			remoteEnt->SetOrigin(finalPos);
 		}
-
-		//gameLocal.GetLocalPlayer()->viewAngles
-
-		
-
-		idAngles remoteAng = gameLocal.GetLocalPlayer()->viewAngles;
-		remoteAng.yaw += 180;
-		remoteAng.pitch *= -1;
-		remoteAng.pitch += 3 * idMath::Sin(gameLocal.time * 0.0005f); //sway
-		remoteAng.yaw += 5 * idMath::Sin(gameLocal.time * 0.0003f);  //sway
-		remoteEnt->SetAngles( remoteAng );
-
-		idVec3	up;
-		remoteAng.ToVectors( NULL, NULL, &up );
-
-
-		idVec3 finalPos = gameLocal.GetLocalPlayer()->GetEyePosition() + (gameLocal.GetLocalPlayer()->viewAngles.ToForward() * 6) + (up * -3.8f     );
-
-		if (remoteRaiseLerp < RISETIME)
-		{
-			//is raising.
-			float amt = remoteRaiseLerp / RISETIME;
-			finalPos.x = idMath::Lerp(baseGatorPos.x, finalPos.x, amt);
-			finalPos.y = idMath::Lerp(baseGatorPos.y, finalPos.y, amt);
-			finalPos.z = idMath::Lerp(baseGatorPos.z, finalPos.z, amt);
-		}
-
-
-		//remoteEnt->SetOrigin( gameLocal.GetLocalPlayer()->GetEyePosition() + (gameLocal.GetLocalPlayer()->viewAngles.ToForward() * 6) + (up * -3.8f     ));
-		remoteEnt->SetOrigin(finalPos);
 	}
 	else
 	{

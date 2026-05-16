@@ -8773,7 +8773,7 @@ void idPlayer::PerformImpulse( int impulse ) {
 		}
 		case IMPULSE_41:
 		{
-			//press E.
+			//press E.			
 
 			//no picking up things when noclipping.
 			if (noclip || deckCurLerp < 1)
@@ -8801,27 +8801,30 @@ void idPlayer::PerformImpulse( int impulse ) {
 			}
 			else if (focusFrobEnt)
 			{
-				if (!focusFrobEnt->spawnArgs.GetBool( "noGet" ))
+				if (!focusFrobEnt->spawnArgs.GetBool( "noGet" )
+					&& !pickerWeapon.dragEnt.IsValid()
+					&& !(oldButtons & BUTTON_PICKER))
 				{
+
 					//pick up item in the world.
-					if (focusFrobEnt->IsType(idLauncher::Type) && !pickerHeld)
+					if (focusFrobEnt->IsType(idLauncher::Type) )
 					{
 						static_cast<idLauncher *>( focusFrobEnt )->OnGet();
 					}
-
-					if (focusFrobEnt->IsType(idSentry::Type) && !pickerHeld)
+					else if (focusFrobEnt->IsType(idSentry::Type) )
 					{
 						static_cast<idSentry *>( focusFrobEnt )->OnGet();
 					}
-
-
-					if (focusFrobEnt->IsType(idWeevil::Type) && !pickerHeld)
+					else if (focusFrobEnt->IsType(idWeevil::Type) )
 					{
 						static_cast<idWeevil *>( focusFrobEnt )->OnGet();
 					}
-					
+					else
+					{
+						UseFrob(focusFrobEnt, "onGet");
+					}
 
-					UseFrob( focusFrobEnt, "onGet");
+					
 				}
 			}
 
