@@ -230,6 +230,10 @@ void idWeevil::OnGet( void )
 	beamStart->PostEventMS( &EV_Remove, 0 );
 	beamEnd->PostEventMS( &EV_Remove, 0 );
 	plugModel->PostEventMS( &EV_Remove, 0 );
+
+	gameLocal.GetLocalPlayer()->StartSound( "snd_get", SND_CHANNEL_ANY, 0, false, NULL );
+	this->PostEventMS( &EV_Remove, 0 );
+	gameLocal.GetLocalPlayer()->GiveInventoryItem("weapon_weevil");
 }
 
 void idWeevil::Event_isweevilplugconnected( void )
