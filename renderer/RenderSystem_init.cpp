@@ -1735,6 +1735,10 @@ void R_EnvShot_f( const idCmdArgs &args ) {
 	int			blends;
 	char	*extensions[6] =  { "_px.tga", "_nx.tga", "_py.tga", "_ny.tga", 
 		"_pz.tga", "_nz.tga" };
+
+	//char	*cameraSides[6] = { "_forward.tga", "_back.tga", "_left.tga", "_right.tga",
+	//	"_up.tga", "_down.tga" };
+
 	int			size;
 
 	if ( args.Argc() != 2 && args.Argc() != 3 && args.Argc() != 4 ) {
@@ -1763,38 +1767,47 @@ void R_EnvShot_f( const idCmdArgs &args ) {
 	primary = *tr.primaryView;
 
 	memset( &axis, 0, sizeof( axis ) );
+	
+	//FIXED AXES, FROM THE DARK MOD:
+	// forward = east (positive x-axis in DR)
 	axis[0][0][0] = 1;
-	axis[0][1][2] = 1;
-	axis[0][2][1] = 1;
-
+	axis[0][1][1] = 1;
+	axis[0][2][2] = 1;
+	// back = west
 	axis[1][0][0] = -1;
-	axis[1][1][2] = -1;
-	axis[1][2][1] = 1;
-
+	axis[1][1][1] = -1;
+	axis[1][2][2] = 1;
+	// left = north
 	axis[2][0][1] = 1;
 	axis[2][1][0] = -1;
-	axis[2][2][2] = -1;
-
+	axis[2][2][2] = 1;
+	// right = south
 	axis[3][0][1] = -1;
-	axis[3][1][0] = -1;
+	axis[3][1][0] = 1;
 	axis[3][2][2] = 1;
-
+	// up, while facing forward
 	axis[4][0][2] = 1;
-	axis[4][1][0] = -1;
-	axis[4][2][1] = 1;
-
+	axis[4][1][1] = 1;
+	axis[4][2][0] = -1;
+	// down, while facing forward
 	axis[5][0][2] = -1;
-	axis[5][1][0] = 1;
-	axis[5][2][1] = 1;
+	axis[5][1][1] = 1;
+	axis[5][2][0] = 1;
 
 	for ( i = 0 ; i < 6 ; i++ ) {
 		ref = primary.renderView;
 		ref.x = ref.y = 0;
 		ref.fov_x = ref.fov_y = 90;
-		ref.width = glConfig.vidWidth;
-		ref.height = glConfig.vidHeight;
-		ref.viewaxis = axis[i];
-		sprintf( fullname, "env/%s%s", baseName, extensions[i] );
+		
+		//ref.width = glConfig.vidWidth;
+		//ref.height = glConfig.vidHeight;
+
+		//FIX, FROM THE DARK MOD
+		ref.width = SCREEN_WIDTH;
+		ref.height = SCREEN_HEIGHT;
+
+		ref.viewaxis = axis[i];		
+		sprintf( fullname, "env/%s%s", baseName, extensions[i] );		
 		tr.TakeScreenshot( size, size, fullname, blends, &ref );
 	}
 
